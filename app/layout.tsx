@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Your Name | Portfolio",
+  title: "Fernanda Nadhiftya Putra | Portfolio",
   description: "Full-Stack Developer crafting beautiful digital experiences",
 };
 
