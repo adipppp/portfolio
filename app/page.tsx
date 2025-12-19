@@ -17,6 +17,15 @@ const projects = [
     image: "/projects/booku.png",
     link: "https://github.com/AdPro-C8/BookU-be-bookList",
   },
+  {
+    id: 3,
+    title: "OAuth2 Single Sign-On (SSO)",
+    description:
+      "A learning project implementing OAuth2 SSO with Authorization Server, Resource Server, and Client to understand authentication protocols and system design.",
+    tags: ["OAuth2", "SSO", "Authentication"],
+    image: "/projects/oauth2.jpg",
+    link: "https://github.com/stack-js",
+  },
 ];
 
 const skills = [
