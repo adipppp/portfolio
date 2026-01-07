@@ -1,5 +1,5 @@
 
-import { Github, Linkedin, Mail, Code2 } from 'lucide-react';
+import { Github, Linkedin, Mail, Code2, Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import GithubStats from './GithubStats';
 
@@ -24,38 +24,48 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
-          className="text-4xl md:text-6xl font-bold mb-6 py-2 leading-tight bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent"
+          className="text-4xl md:text-6xl font-bold mb-4 py-2 leading-tight bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent"
         >
-          Backend Engineer & Architect
+          Fernanda Nadhiftya Putra
         </motion.h1>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
-          className="text-lg md:text-xl text-slate-400 max-w-2xl mb-10"
+          className="text-lg md:text-xl text-slate-400 max-w-2xl mb-8"
         >
-          Membangun solusi sisi server yang skalabel, kokoh, dan berkinerja tinggi. 
-          Spesialisasi dalam sistem terdistribusi, desain API, dan infrastruktur cloud.
+          Mahasiswa Ilmu Komputer Universitas Indonesia & Backend Engineer.
+          Tertarik pada arsitektur web, pengembangan API, dan optimasi performa.
         </motion.p>
+        
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.5 }}
-          className="flex gap-4"
+          className="flex flex-col sm:flex-row gap-4 mb-12"
         >
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors">
-            <Github className="w-6 h-6" />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors">
-            <Linkedin className="w-6 h-6" />
-          </a>
-          <a href="mailto:email@example.com" className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors">
-            <Mail className="w-6 h-6" />
+          <div className="flex gap-4 justify-center">
+            <a href="https://github.com/fernandanp" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700">
+              <Github className="w-6 h-6" />
+            </a>
+            <a href="https://linkedin.com/in/fernanda-nadhiftya-putra" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700">
+              <Linkedin className="w-6 h-6" />
+            </a>
+            <a href="mailto:fernanda.nadhiftya@gmail.com" className="p-3 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700">
+              <Mail className="w-6 h-6" />
+            </a>
+          </div>
+          
+          <a 
+            href="/resume.pdf" 
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-full transition-all hover:shadow-[0_0_20px_rgba(37,99,235,0.4)]"
+          >
+            <Download className="w-4 h-4" /> Unduh CV
           </a>
         </motion.div>
 
         {/* Change 'octocat' to your real GitHub username */}
-        <GithubStats username="octocat" />
+        <GithubStats username="fernandanp" />
       </motion.div>
     </section>
   );

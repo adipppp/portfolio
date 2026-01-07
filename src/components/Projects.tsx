@@ -5,27 +5,27 @@ import { Link } from 'react-router-dom';
 
 const projects = [
   {
-    id: "ecommerce",
-    title: "Platform E-commerce Microservices",
-    description: "Backend e-commerce yang sangat skalabel dibangun dengan Go dan Node.js. Menangani pelacakan inventaris real-time dan alur pembayaran yang kompleks.",
-    tags: ["Go", "RabbitMQ", "PostgreSQL", "Docker"],
-    github: "#",
+    id: "asrama-ui",
+    title: "Asrama UI Backend Engine",
+    description: "Sistem manajemen asrama Universitas Indonesia yang baru. Menggunakan Fiber (Go) dan MongoDB untuk skalabilitas tinggi.",
+    tags: ["Go", "Fiber", "MongoDB", "Docker"],
+    github: "https://github.com/fernandanp",
+    link: "https://residence.ui.ac.id"
+  },
+  {
+    id: "go-micro-auth",
+    title: "Microservices Auth Service",
+    description: "Layanan autentikasi terdistribusi menggunakan JWT dan gRPC untuk komunikasi antar layanan yang cepat dan aman.",
+    tags: ["Go", "gRPC", "PostgreSQL", "Redis"],
+    github: "https://github.com/fernandanp",
     link: "#"
   },
   {
-    id: "scheduler",
-    title: "Distributed Task Scheduler",
-    description: "Penjadwal tugas cloud-native yang menangani jutaan pekerjaan per detik dengan presisi dan toleransi kesalahan.",
-    tags: ["Node.js", "Redis", "TypeScript", "Kubernetes"],
-    github: "#",
-    link: "#"
-  },
-  {
-    id: "analytics",
-    title: "Analytics API Engine",
-    description: "Mesin analitik real-time untuk melacak perilaku pengguna di berbagai aplikasi multi-tenant.",
-    tags: ["Python", "FastAPI", "ClickHouse", "AWS"],
-    github: "#",
+    id: "crawler-api",
+    title: "High Performance Web Crawler",
+    description: "Crawler web konkuren yang dibangun dengan Go untuk mengumpulkan data real-time dengan efisiensi tinggi.",
+    tags: ["Go", "Concurrency", "PostgreSQL", "InfluxDB"],
+    github: "https://github.com/fernandanp",
     link: "#"
   }
 ];

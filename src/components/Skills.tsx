@@ -25,36 +25,34 @@ const SkillCard = ({ icon: Icon, title, skills, index }: { icon: any, title: str
 );
 
 const Skills = () => {
+  const coreExpertise = [
+    { name: "Go", rating: 4 },
+    { name: "SQL", rating: 4 },
+    { name: "MongoDB", rating: 4 },
+    { name: "Docker", rating: 4 },
+    { name: "Kubernetes", rating: 3 },
+  ];
+
   const skillGroups = [
     {
       icon: Server,
-      title: "Backend Core",
-      skills: ["Node.js", "Go", "Python", "Java", "gRPC", "REST API"]
+      title: "Backend",
+      skills: ["Go", "Fiber", "Node.js", "REST API", "Microservices"]
     },
     {
       icon: Database,
       title: "Databases",
-      skills: ["PostgreSQL", "MongoDB", "Redis", "Elasticsearch", "Prisma"]
+      skills: ["PostgreSQL", "MongoDB", "SQL", "Redis"]
     },
     {
       icon: Cloud,
-      title: "DevOps & Cloud",
-      skills: ["Docker", "Kubernetes", "AWS", "CI/CD", "Terraform"]
-    },
-    {
-      icon: Shield,
-      title: "Security",
-      skills: ["OAuth2", "JWT", "HTTPS", "Encryption", "Security Auditing"]
+      title: "DevOps & Tools",
+      skills: ["Docker", "Kubernetes", "CI/CD", "Git"]
     },
     {
       icon: Cpu,
       title: "Architecture",
-      skills: ["Microservices", "Event-Sourcing", "Message Queues", "DDD"]
-    },
-    {
-      icon: MessageSquare,
-      title: "Communication",
-      skills: ["Kafka", "RabbitMQ", "MQTT", "WebSockets"]
+      skills: ["System Design", "ERD Design", "Microservices"]
     }
   ];
 
@@ -69,7 +67,35 @@ const Skills = () => {
         >
           Keahlian Teknis
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {/* Core Expertise Progress Bars */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
+          {coreExpertise.map((item, index) => (
+            <motion.div 
+              key={item.name}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <div className="flex justify-between mb-2">
+                <span className="font-medium text-slate-300">{item.name}</span>
+                <span className="text-blue-400">{item.rating}/5</span>
+              </div>
+              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${(item.rating / 5) * 100}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  className="h-full bg-gradient-to-r from-blue-600 to-blue-400"
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {skillGroups.map((group, index) => (
             <SkillCard key={group.title} {...group} index={index} />
           ))}

@@ -14,7 +14,7 @@ const Contact = () => {
       >
         <h2 className="text-3xl font-bold mb-4 text-center text-white">Mari Terhubung</h2>
         <p className="text-slate-400 text-center mb-10">
-          Tertarik untuk bekerja sama atau memiliki pertanyaan? Tinggalkan pesan di bawah ini.
+          Tertarik untuk bekerja sama atau memiliki pertanyaan? Tinggalkan pesan di bawah ini atau email langsung ke <a href="mailto:fernanda.nadhiftya@gmail.com" className="text-blue-400 hover:underline">fernanda.nadhiftya@gmail.com</a>.
         </p>
         <form className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

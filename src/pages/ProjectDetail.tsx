@@ -1,19 +1,52 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Github, ExternalLink, Shield, Server, Database } from 'lucide-react';
 
-const ProjectDetail = () => {
-  // Mock data - in real app, fetch this based on ID
-  const project = {
-    title: "Platform E-commerce Microservices",
-    description: "Analisis mendalam tentang arsitektur sistem e-commerce berskala besar.",
-    longDescription: "Proyek ini dirancang untuk menangani beban trafik tinggi dengan memisahkan fungsi-fungsi utama menjadi layanan mandiri. Menggunakan gRPC untuk komunikasi antar layanan yang cepat dan efisien.",
-    challenge: "Sinkronisasi stok barang secara real-time di seluruh instance layanan tanpa menyebabkan bottleneck pada database.",
-    solution: "Implementasi pola Event Sourcing dengan RabbitMQ dan caching terdistribusi menggunakan Redis.",
-    techStack: ["Go", "RabbitMQ", "PostgreSQL", "Redis", "Docker", "gRPC"],
-    github: "#",
+const projectsData: Record<string, any> = {
+  "asrama-ui": {
+    title: "Asrama UI Backend Engine",
+    description: "Sistem manajemen asrama Universitas Indonesia yang baru.",
+    longDescription: "Proyek ini bertujuan untuk menyediakan sistem pendaftaran dan pengelolaan asrama yang efisien bagi mahasiswa UI. Dibuat menggunakan framework Fiber (Go) dan database MongoDB untuk performa optimal.",
+    challenge: "Menangani lonjakan trafik saat masa pendaftaran asrama dan memastikan konsistensi data pada ribuan pendaftar.",
+    solution: "Optimasi indexing pada MongoDB dan implementasi caching strategis untuk mengurangi beban database utama.",
+    techStack: ["Go", "Fiber", "MongoDB", "Redesign ERD", "Docker"],
+    github: "https://github.com/fernandanp",
+    demo: "https://residence.ui.ac.id"
+  },
+  "go-micro-auth": {
+    title: "Microservices Auth Service",
+    description: "Layanan autentikasi terdistribusi menggunakan JWT dan gRPC.",
+    longDescription: "Layanan pusat untuk menangani autentikasi dan otorisasi di seluruh ekosistem microservices. Menggunakan gRPC untuk komunikasi antar-layanan yang efisien.",
+    challenge: "Memastikan latensi rendah pada verifikasi token di setiap request ke layanan lain.",
+    solution: "Penggunaan Redis untuk caching token dan gRPC pooling untuk menjaga koneksi tetap terbuka.",
+    techStack: ["Go", "gRPC", "PostgreSQL", "Redis", "JWT"],
+    github: "https://github.com/fernandanp",
     demo: "#"
-  };
+  },
+  "crawler-api": {
+    title: "High Performance Web Crawler",
+    description: "Crawler web konkuren yang dibangun dengan Go.",
+    longDescription: "Sistem untuk merayapi data dari berbagai sumber secara konkuren dan menyimpannya dalam database time-series untuk analisis lebih lanjut.",
+    challenge: "Menghindari pemblokiran oleh target website dan mengelola ribuan goroutine secara bersamaan.",
+    solution: "Implementasi worker pool pattern dan rotasi proxy serta user-agent secara otomatis.",
+    techStack: ["Go", "Concurrency", "PostgreSQL", "InfluxDB"],
+    github: "https://github.com/fernandanp",
+    demo: "#"
+  }
+};
+
+const ProjectDetail = () => {
+  const { id } = useParams();
+  const project = id ? projectsData[id] : null;
+
+  if (!project) {
+    return (
+      <div className="pt-32 pb-20 px-4 text-center">
+        <h1 className="text-2xl font-bold mb-4">Proyek tidak ditemukan</h1>
+        <Link to="/" className="text-blue-500 hover:underline">Kembali ke Beranda</Link>
+      </div>
+    );
+  }
 
   return (
     <motion.div 
@@ -29,7 +62,7 @@ const ProjectDetail = () => {
         <header>
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">{project.title}</h1>
           <div className="flex flex-wrap gap-2 mb-8">
-            {project.techStack.map(tech => (
+            {project.techStack.map((tech: string) => (
               <span key={tech} className="px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 text-sm">
                 {tech}
               </span>
@@ -61,10 +94,10 @@ const ProjectDetail = () => {
             <div className="p-6 rounded-2xl bg-blue-500/5 border border-blue-500/20">
               <h3 className="font-bold mb-4">Tautan Terkait</h3>
               <div className="space-y-3">
-                <a href={project.github} className="flex items-center gap-3 text-slate-300 hover:text-white transition-colors">
+                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-300 hover:text-white transition-colors">
                   <Github className="w-5 h-5" /> Source Code
                 </a>
-                <a href={project.demo} className="flex items-center gap-3 text-slate-300 hover:text-white transition-colors">
+                <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-300 hover:text-white transition-colors">
                   <ExternalLink className="w-5 h-5" /> Live Demo
                 </a>
               </div>
