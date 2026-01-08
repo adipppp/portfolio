@@ -1,18 +1,17 @@
-import { motion } from 'framer-motion';
-import { Briefcase, Calendar, MapPin } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Briefcase, Calendar, MapPin } from "lucide-react";
 
 const experiences = [
   {
     role: "Backend Engineer Intern",
     company: "Direktorat Transformasi Digital Universitas Indonesia",
-    period: "Februari 2025 - Juli 2025",
+    period: "Februari 2025 - Juli 2025 (6 Bulan)",
     location: "Depok, Indonesia",
     description: [
-      "Mengembangkan RESTful API menggunakan Golang dan Fiber untuk website Asrama UI (<a href=\"https://residence.ui.ac.id\" target=\"_blank\" rel=\"noopener noreferrer\">residence.ui.ac.id</a>).",
-      "Melakukan integrasi third-party API untuk sistem pembayaran dan notifikasi.",
-      "Meningkatkan performa query database MongoDB sebesar 30% melalui optimasi indexing dan schema design.",
-      "Berkolaborasi dengan tim frontend untuk memastikan integrasi API yang mulus."
-    ]
+      'Mengembangkan RESTful API menggunakan Golang dan Fiber untuk website Asrama UI (<a href="https://residence.ui.ac.id" target="_blank" rel="noopener noreferrer">residence.ui.ac.id</a>).',
+      "Mengimplementasikan sistem autentikasi dan authorisasi berbasis JWT untuk keamanan API.",
+      "Berkolaborasi dengan tim frontend untuk memastikan integrasi API yang mulus.",
+    ],
   },
   // Anda bisa menambah pengalaman lain di sini
 ];
@@ -21,7 +20,7 @@ const Experience = () => {
   return (
     <section id="experience" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -32,7 +31,7 @@ const Experience = () => {
 
         <div className="space-y-12">
           {experiences.map((exp, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -63,7 +62,11 @@ const Experience = () => {
 
                 <ul className="list-disc list-inside space-y-2 text-slate-400 text-sm leading-relaxed [&_a]:text-blue-400 [&_a]:font-medium [&_a]:no-underline [&_a:hover]:underline [&_a]:underline-offset-4 [&_a]:transition-colors [&_a:hover]:text-blue-300">
                   {exp.description.map((item, i) => (
-                    <li key={i} className="pl-2 -indent-5 ml-5" dangerouslySetInnerHTML={{ __html: item }}></li>
+                    <li
+                      key={i}
+                      className="pl-2 -indent-5 ml-5"
+                      dangerouslySetInnerHTML={{ __html: item }}
+                    ></li>
                   ))}
                 </ul>
               </div>

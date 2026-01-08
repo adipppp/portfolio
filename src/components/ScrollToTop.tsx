@@ -8,9 +8,9 @@ export default function ScrollToTop() {
     if (!hash) {
       window.scrollTo(0, 0);
     } else {
-      const element = document.getElementById(hash.replace('#', ''));
+      const element = document.getElementById(hash.replace("#", ""));
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        element.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [pathname, hash]);

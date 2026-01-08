@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import ProjectDetail from './pages/ProjectDetail';
-import ScrollToTop from './components/ScrollToTop';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import ProjectDetail from "./pages/ProjectDetail";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Footer />
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

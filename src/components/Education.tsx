@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { GraduationCap, Calendar, MapPin } from 'lucide-react';
+import { motion } from "framer-motion";
+import { GraduationCap, Calendar, MapPin } from "lucide-react";
 
 const education = [
   {
@@ -7,22 +7,24 @@ const education = [
     degree: "S1 Ilmu Komputer",
     period: "2022 - Saat ini",
     location: "Depok, Indonesia",
-    description: "Fokus pada pengembangan perangkat lunak, algoritma, dan sistem terdistribusi."
+    description:
+      "Berfokus pada dasar-dasar ilmu komputer, pengembangan backend, arsitektur sistem, dan infrastruktur jaringan/cloud.",
   },
   {
     school: "SMAN 8 Jakarta",
     degree: "MIPA",
     period: "2019 - 2022",
     location: "Jakarta Selatan, Indonesia",
-    description: "Lulus dengan fokus pada Matematika dan Ilmu Pengetahuan Alam."
-  }
+    description:
+      "Fokus pada Matematika dan Ilmu Pengetahuan Alam dengan minat awal pada teknologi.",
+  },
 ];
 
 const Education = () => {
   return (
     <section id="education" className="py-20 px-4 bg-slate-900/30">
       <div className="max-w-4xl mx-auto">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -33,7 +35,7 @@ const Education = () => {
 
         <div className="space-y-12">
           {education.map((edu, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -46,7 +48,9 @@ const Education = () => {
               <div className="bg-slate-800/30 p-6 rounded-2xl border border-slate-700">
                 <div className="flex flex-col md:flex-row-reverse md:items-center justify-between gap-2 mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-white">{edu.school}</h3>
+                    <h3 className="text-xl font-bold text-white">
+                      {edu.school}
+                    </h3>
                     <div className="flex items-center justify-end gap-2 text-emerald-400 font-medium">
                       {edu.degree} <GraduationCap className="w-4 h-4" />
                     </div>
