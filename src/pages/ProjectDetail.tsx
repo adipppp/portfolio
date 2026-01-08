@@ -7,26 +7,40 @@ const projectsData: Record<string, any> = {
     title: "Asrama UI API",
     description: "Sistem manajemen asrama Universitas Indonesia yang baru.",
     longDescription:
-      "Proyek ini bertujuan untuk menyediakan sistem pendaftaran dan pengelolaan asrama yang efisien bagi mahasiswa UI. API ini dibangun dengan prinsip REST (Representational State Transfer) menggunakan framework Fiber (Go) dan database MongoDB.",
+      "Proyek ini bertujuan untuk menyediakan sistem pendaftaran dan pengelolaan asrama yang efisien bagi mahasiswa UI. API ini dibangun dengan prinsip REST menggunakan framework Fiber (Go) dan database MongoDB, dengan fokus utama pada pembenahan struktur data dari sistem legacy.",
     challenge:
-      "Menangani lonjakan trafik saat masa pendaftaran asrama serta mengelola transisi dari struktur database legacy yang memiliki redundansi data tinggi.",
+      "Mengelola transisi dari struktur database legacy yang memiliki redundansi data tinggi dan skema yang tidak efisien.",
     solution:
-      "Melakukan redesign sebagian ERD untuk normalisasi data, optimasi query dan indexing pada MongoDB, serta standarisasi arsitektur REST untuk integrasi yang lebih efisien.",
-    techStack: ["Go", "Fiber", "REST API", "MongoDB", "Redesign ERD", "Docker"],
+      "Melakukan transformasi database dengan redesign ERD (Entity Relationship Diagram). Solusi ini mencakup migrasi skema legacy ke desain yang lebih modular, optimasi query dan indexing pada MongoDB, serta standarisasi REST architecture.",
+    techStack: [
+      "Go",
+      "Fiber",
+      "REST API",
+      "MongoDB",
+      "ERD Redesign",
+      "System Migration",
+    ],
     github: "https://gitlab.ui.ac.id/dtd/asrama-ui-backend",
     demo: "https://residence.ui.ac.id",
   },
   marmut: {
     title: "Marmut (Mari Mutar Musik)",
     description:
-      "Media pembelajaran pengolahan audio dan state management di Node.js.",
+      "Music player dengan audio engine yang menerapkan arsitektur distributed systems untuk pemrosesan audio secara real-time.",
     longDescription:
-      "Marmut dibangun sebagai sarana untuk mendalami konsep pengolahan data audio dan state management yang kompleks pada Node.js. Melalui proyek ini, saya mengimplementasikan Node.js Streams untuk transmisi audio real-time serta menggunakan Prisma ORM untuk mengelola persistensi data pengguna.",
+      "Marmut merupakan music player yang mampu mengelola orkestrasi audio processing melalui integrasi dengan distributed audio engine. Proyek ini memanfaatkan Lavalink untuk memisahkan logic audio decoding dari aplikasi utama untuk menjaga responsivitas aplikasi.",
     challenge:
-      "Mengelola sinkronisasi antara logic music queue yang kompleks dengan aliran data audio (streams) tanpa membebani memori.",
+      "Menghindari degradasi performa pada aplikasi utama akibat task resource-intensive seperti audio decoding dan streaming yang berjalan secara bersamaan.",
     solution:
-      "Implementasi memory-efficient queue dan Node.js Streams untuk streaming audio dari source ke Discord voice gateway secara real-time.",
-    techStack: ["Node.js", "Prisma", "Streams", "discord.js", "PostgreSQL"],
+      "Menerapkan arsitektur distributed systems dengan mendelegasikan seluruh beban audio processing ke server eksternal (Lavalink). Untuk manajemen state dari music player, implementasi music queue diterapkan secara custom menggunakan Prisma ORM dan database PostgreSQL.",
+    techStack: [
+      "Node.js",
+      "Prisma",
+      "Streams",
+      "discord.js",
+      "PostgreSQL",
+      "Lavalink",
+    ],
     github: "https://github.com/adipppp/marmut",
   },
   "sso-system": {
@@ -36,9 +50,9 @@ const projectsData: Record<string, any> = {
     longDescription:
       "Proyek ini merupakan studi kasus implementasi Identity Provider (IdP) menggunakan protokol OpenID Connect yang dideploy pada Google Cloud Platform. Tantangan utama proyek ini adalah menempatkan Authorization Server, Resource Server, dan Client pada subnet yang berbeda di dalam VPC, yang mengharuskan konfigurasi security group dan routing yang sesuai untuk memvalidasi keamanan komunikasi antar jaringan.",
     challenge:
-      "Mengelola segregasi jaringan menggunakan VPC Subnetting dan konfigurasi aturan Google Cloud Firewall yang ketat namun tetap mengizinkan handshake OIDC yang valid antar segmen.",
+      "Melakukan segmentasi jaringan menggunakan VPC Subnetting dan konfigurasi Google Cloud Firewall yang ketat namun tetap mengizinkan OIDC handshake yang valid antar subnet.",
     solution:
-      "Implementasi network topology yang terisolasi pada GCP dengan aturan ingress/egress yang ketat serta penggunaan Spring Authorization Server untuk menangani authorisasi lintas subnet.",
+      "Implementasi network topology yang terisolasi pada GCP dengan aturan ingress/egress yang ketat serta penggunaan Spring Authorization Server untuk autentikasi lintas subnet.",
     techStack: [
       "OIDC",
       "Spring Boot",

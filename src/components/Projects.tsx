@@ -7,8 +7,8 @@ const projects = [
     id: "asrama-ui",
     title: "Asrama UI API",
     description:
-      "REST API untuk sistem manajemen asrama Universitas Indonesia. Mencakup redesign ERD untuk efisiensi data dan penggunaan Fiber (Go) serta MongoDB.",
-    tags: ["Go", "Fiber", "MongoDB", "Redesign ERD"],
+      "REST API untuk sistem manajemen asrama Universitas Indonesia. Memanfaatkan Fiber (Go) dan MongoDB untuk menghadirkan sistem pendaftaran hunian yang lebih andal dan efisien.",
+    tags: ["Go", "Fiber", "MongoDB", "REST API"],
     github: "https://gitlab.ui.ac.id/dtd/asrama-ui-backend",
     link: "https://residence.ui.ac.id",
   },
@@ -16,7 +16,7 @@ const projects = [
     id: "sso-system",
     title: "OIDC Identity System",
     description:
-      "Implementasi SSO berbasis OIDC pada Google Cloud untuk memvalidasi konektivitas dan keamanan antar segmen jaringan (VPC & Firewall).",
+      "Implementasi SSO berbasis OIDC pada Google Cloud untuk memvalidasi konektivitas dan keamanan antar jaringan (VPC & Firewall).",
     tags: ["OIDC", "GCP", "VPC Network", "Cloud Firewall"],
     github: "https://github.com/adipppp/ssoserver",
   },
@@ -24,7 +24,7 @@ const projects = [
     id: "marmut",
     title: "Marmut (Mari Mutar Musik)",
     description:
-      "Proyek untuk mendalami pengolahan audio dan state management di Node.js. Mengimplementasikan Streams untuk transmisi data real-time dan Prisma ORM.",
+      "Music player berbasis audio engine yang menerapkan arsitektur distributed systems untuk pemrosesan audio secara real-time.",
     tags: ["Node.js", "Prisma", "Streams", "discord.js"],
     github: "https://github.com/adipppp/marmut",
   },

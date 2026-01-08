@@ -8,9 +8,10 @@ const experiences = [
     period: "Februari 2025 - Juli 2025 (6 Bulan)",
     location: "Depok, Indonesia",
     description: [
-      'Mengembangkan RESTful API menggunakan Golang dan Fiber untuk website Asrama UI (<a href="https://residence.ui.ac.id" target="_blank" rel="noopener noreferrer">residence.ui.ac.id</a>).',
-      "Mengimplementasikan sistem autentikasi dan authorisasi berbasis JWT untuk keamanan API.",
-      "Berkolaborasi dengan tim frontend untuk memastikan integrasi API yang mulus.",
+      "Mengembangkan RESTful API menggunakan Golang dan Fiber untuk website Asrama UI",
+      "Implementasi ERD yang telah dinormalisasi untuk mengurangi redundansi data",
+      "Mengimplementasikan sistem autentikasi dan authorisasi berbasis JWT",
+      "Berkolaborasi dengan tim frontend untuk memastikan integrasi API yang mulus",
     ],
   },
   // Anda bisa menambah pengalaman lain di sini

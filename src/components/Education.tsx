@@ -16,7 +16,7 @@ const education = [
     period: "2019 - 2022",
     location: "Jakarta Selatan, Indonesia",
     description:
-      "Fokus pada Matematika dan Ilmu Pengetahuan Alam dengan minat awal pada teknologi.",
+      "Fokus pada Matematika dan Ilmu Pengetahuan Alam dengan lintas minat informatika.",
   },
 ];
 
