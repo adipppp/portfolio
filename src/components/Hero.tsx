@@ -1,4 +1,4 @@
-import { Github, Mail, Code2, Download } from "lucide-react";
+import { Github, Mail, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 import GithubStats from "./GithubStats";
 

@@ -1,11 +1,4 @@
-import {
-  Database,
-  Server,
-  Cloud,
-  Shield,
-  Cpu,
-  MessageSquare,
-} from "lucide-react";
+import { Database, Server, Cloud, Shield, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
 
 const SkillCard = ({
