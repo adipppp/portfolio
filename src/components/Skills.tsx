@@ -60,7 +60,7 @@ const Skills = () => {
     {
       icon: Cloud,
       title: "DevOps & Tools",
-      skills: ["Docker", "Kubernetes", "CI/CD", "GCP", "Git"],
+      skills: ["Docker", "Kubernetes", "GCP", "CI/CD", "Git"],
     },
     {
       icon: Cpu,

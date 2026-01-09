@@ -7,11 +7,11 @@ const projectsData: Record<string, any> = {
     title: "Asrama UI API",
     description: "Sistem manajemen asrama Universitas Indonesia yang baru.",
     longDescription:
-      "Proyek ini bertujuan untuk menyediakan sistem pendaftaran dan pengelolaan asrama yang efisien bagi mahasiswa UI. API ini dibangun dengan prinsip REST menggunakan framework Fiber (Go) dan database MongoDB, dengan fokus utama pada pembenahan struktur data dari sistem legacy.",
+      "Proyek ini bertujuan untuk menyediakan sistem pendaftaran dan pengelolaan asrama yang efisien bagi mahasiswa UI. API ini dibangun dengan arsitektur REST menggunakan framework Fiber (Go) dan database MongoDB, dengan fokus pada implementasi schema yang telah didesain ulang.",
     challenge:
-      "Mengelola transisi dari struktur database legacy yang memiliki redundansi data tinggi dan skema yang tidak efisien.",
+      "Mengelola transisi dari struktur database legacy yang memiliki redundansi data tinggi dan schema yang tidak efisien.",
     solution:
-      "Melakukan transformasi database dengan redesign ERD (Entity Relationship Diagram). Solusi ini mencakup migrasi skema legacy ke desain yang lebih modular, optimasi query dan indexing pada MongoDB, serta standarisasi REST architecture.",
+      "Melakukan transformasi database dengan mendesain ulang ERD (Entity Relationship Diagram). Solusi ini mencakup migrasi schema legacy ke desain yang lebih modular, optimasi query dan indexing pada MongoDB, serta standarisasi API berbasis REST architecture.",
     techStack: [
       "Go",
       "Fiber",
@@ -48,9 +48,9 @@ const projectsData: Record<string, any> = {
     description:
       "Studi kasus sistem identitas terpusat berbasis OpenID Connect.",
     longDescription:
-      "Proyek ini merupakan studi kasus implementasi Identity Provider (IdP) menggunakan protokol OpenID Connect yang dideploy pada Google Cloud Platform. Tantangan utama proyek ini adalah menempatkan Authorization Server, Resource Server, dan Client pada subnet yang berbeda di dalam VPC, yang mengharuskan konfigurasi security group dan routing yang sesuai untuk memvalidasi keamanan komunikasi antar jaringan.",
+      "Proyek ini merupakan studi kasus implementasi Identity Provider (IdP) menggunakan protokol OpenID Connect yang dideploy pada Google Cloud Platform. Tantangan utama proyek ini adalah menempatkan Authorization Server, Resource Server, dan Client pada subnet yang berbeda di dalam VPC dan memastikan proses autentikasi serta authorisasi berjalan dengan lancar.",
     challenge:
-      "Melakukan segmentasi jaringan menggunakan VPC Subnetting dan konfigurasi Google Cloud Firewall yang ketat namun tetap mengizinkan OIDC handshake yang valid antar subnet.",
+      "Melakukan segmentasi jaringan menggunakan VPC Subnetting dan konfigurasi security group dan routing yang sesuai pada Google Cloud Platform. OIDC handshake harus mampu berjalan dengan benar meskipun setiap komponen berada pada subnet yang berbeda.",
     solution:
       "Implementasi network topology yang terisolasi pada GCP dengan aturan ingress/egress yang ketat serta penggunaan Spring Authorization Server untuk autentikasi lintas subnet.",
     techStack: [
@@ -72,6 +72,24 @@ const projectsData: Record<string, any> = {
         url: "https://github.com/adipppp/resourceserver",
       },
     ],
+  },
+  "booku-booklist": {
+    title: "Book List Microservice",
+    description: "Microservice REST API untuk manajemen buku dengan Spring Boot 3.",
+    longDescription:
+      "Proyek ini merupakan sebuah microservice untuk mengelola katalog buku pada platform BookU. Proyek ini dibangun menggunakan Spring Boot 3 dan Java 21, menyediakan API untuk operasi CRUD buku dengan fitur filtering dan sorting menggunakan Spring Data JPA Specifications.",
+    challenge:
+      "Membangun sistem pencarian buku yang fleksibel dengan berbagai parameter kriteria serta memastikan integritas dan performa data layanan di lingkungan microservices.",
+    solution:
+      "Implementasi Spring Data JPA Specifications untuk menangani query filtering dan sorting pada katalog buku. Proyek ini juga menggunakan PostgreSQL sebagai database utama untuk menjamin persistensi data.",
+    techStack: [
+      "Spring Boot",
+      "Java 21",
+      "Spring Data JPA",
+      "PostgreSQL",
+      "Docker",
+    ],
+    github: "https://github.com/AdPro-C8/BookU-be-bookList",
   },
 };
 

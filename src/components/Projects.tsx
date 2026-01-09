@@ -21,6 +21,14 @@ const projects = [
     github: "https://github.com/adipppp/ssoserver",
   },
   {
+    id: "booku-booklist",
+    title: "Book List Microservice",
+    description:
+      "Microservice REST API untuk manajemen buku dengan Spring Boot 3. Fokus pada clean architecture dan fleksibilitas query menggunakan JPA Specifications.",
+    tags: ["Spring Boot", "Java", "JPA Specs", "PostgreSQL"],
+    github: "https://github.com/AdPro-C8/BookU-be-bookList",
+  },
+  {
     id: "marmut",
     title: "Marmut (Mari Mutar Musik)",
     description:
