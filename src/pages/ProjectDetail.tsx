@@ -52,7 +52,7 @@ const projectsData: Record<string, any> = {
     challenge:
       "Melakukan segmentasi jaringan menggunakan VPC Subnetting dan konfigurasi security group dan routing yang sesuai pada Google Cloud Platform. OIDC handshake harus mampu berjalan dengan benar meskipun setiap komponen berada pada subnet yang berbeda.",
     solution:
-      "Implementasi network topology yang terisolasi pada GCP dengan aturan ingress/egress yang ketat serta penggunaan Spring Authorization Server untuk autentikasi lintas subnet.",
+      "Implementasi network topology yang terisolasi pada GCP dengan aturan ingress/egress yang sesuai serta penggunaan Spring Authorization Server untuk autentikasi lintas subnet.",
     techStack: [
       "OIDC",
       "Spring Boot",
