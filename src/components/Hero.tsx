@@ -38,7 +38,7 @@ const Hero = () => {
           transition={{ delay: 0.4, duration: 0.5 }}
           className="text-lg md:text-xl text-slate-400 max-w-2xl mb-8"
         >
-          Mahasiswa Ilmu Komputer Universitas Indonesia & Backend Engineer.
+          Mahasiswa Ilmu Komputer & Backend Engineer.
           Tertarik pada arsitektur web, pengembangan API, Cloud Infrastructure,
           dan Networking.
         </motion.p>
