@@ -49,7 +49,7 @@ const Skills = () => {
   const skillGroups = [
     {
       icon: Server,
-      title: "Backend",
+      title: "Frameworks",
       skills: ["Go", "Fiber", "Java", "Spring Boot", "Node.js"],
     },
     {

@@ -75,7 +75,8 @@ const projectsData: Record<string, any> = {
   },
   "booku-booklist": {
     title: "Book List Microservice",
-    description: "Microservice REST API untuk manajemen buku dengan Spring Boot 3.",
+    description:
+      "Microservice REST API untuk manajemen buku dengan Spring Boot 3.",
     longDescription:
       "Proyek ini merupakan sebuah microservice untuk mengelola katalog buku pada platform BookU. Proyek ini dibangun menggunakan Spring Boot 3 dan Java 21, menyediakan API untuk operasi CRUD buku dengan fitur filtering dan sorting menggunakan Spring Data JPA Specifications.",
     challenge:

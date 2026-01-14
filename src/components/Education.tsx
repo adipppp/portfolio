@@ -8,7 +8,7 @@ const education = [
     period: "2022 - Saat ini",
     location: "Depok, Indonesia",
     description:
-      "Berfokus pada dasar-dasar ilmu komputer, pengembangan backend, arsitektur sistem, dan infrastruktur jaringan/cloud.",
+      "Berfokus pada dasar-dasar ilmu komputer, pengembangan web, arsitektur sistem, dan infrastruktur jaringan/cloud.",
   },
   {
     school: "SMAN 8 Jakarta",
