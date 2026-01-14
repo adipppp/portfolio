@@ -79,7 +79,7 @@ const projectsData: Record<string, any> = {
     longDescription:
       "Proyek ini merupakan sebuah microservice untuk mengelola katalog buku pada platform BookU. Proyek ini dibangun menggunakan Spring Boot 3 dan Java 21, menyediakan API untuk operasi CRUD buku dengan fitur filtering dan sorting menggunakan Spring Data JPA Specifications.",
     challenge:
-      "Membangun sistem pencarian buku yang fleksibel dengan berbagai parameter kriteria serta memastikan integritas dan performa data layanan di lingkungan microservices.",
+      "Membangun sistem pencarian buku yang fleksibel dengan berbagai parameter kriteria serta memastikan integritas data dan performa layanan di lingkungan microservices.",
     solution:
       "Implementasi Spring Data JPA Specifications untuk menangani query filtering dan sorting pada katalog buku. Proyek ini juga menggunakan PostgreSQL sebagai database utama untuk menjamin persistensi data.",
     techStack: [
