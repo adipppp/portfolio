@@ -68,7 +68,7 @@ const Projects = () => {
               className="flex flex-col h-full bg-slate-800/30 rounded-2xl border border-slate-700 overflow-hidden"
             >
               <Link
-                to={`/project/${project.id}`}
+                to={`/projects/${project.id}`}
                 className="p-6 flex-1 flex flex-col text-left group"
               >
                 <h3 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors">
