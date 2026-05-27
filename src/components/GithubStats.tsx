@@ -1,32 +1,43 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Users, GitBranch, Terminal } from "lucide-react";
+import type { GithubUserStats } from "../types";
 
 const GithubStats = ({ username }: { username: string }) => {
-  const [stats, setStats] = useState<any>(null);
+  const [stats, setStats] = useState<GithubUserStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [imgError, setImgError] = useState(false);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     const fetchStats = async () => {
       try {
         const response = await fetch(
           `https://api.github.com/users/${username}`,
+          { signal: abortController.signal },
         );
         const data = await response.json();
 
-        setStats({
-          public_repos: data.public_repos,
-          followers: data.followers,
-          following: data.following,
-        });
-        setLoading(false);
+        if (!abortController.signal.aborted) {
+          setStats({
+            public_repos: data.public_repos,
+            followers: data.followers,
+            following: data.following,
+          });
+          setLoading(false);
+        }
       } catch (error) {
-        console.error("Error fetching GitHub stats:", error);
-        setLoading(false);
+        if (!abortController.signal.aborted) {
+          console.error("Error fetching GitHub stats:", error);
+          setLoading(false);
+        }
       }
     };
 
     fetchStats();
+
+    return () => abortController.abort();
   }, [username]);
 
   if (loading)
@@ -37,21 +48,26 @@ const GithubStats = ({ username }: { username: string }) => {
     );
   if (!stats) return null;
 
-  const statItems = [
-    { label: "Repositories", value: stats.public_repos, icon: Terminal },
-    { label: "Followers", value: stats.followers, icon: Users },
-    { label: "Following", value: stats.following, icon: GitBranch },
+  const statItems: {
+    label: string;
+    value: number;
+    icon: typeof Terminal;
+    id: string;
+  }[] = [
+    { label: "Repositories", value: stats.public_repos, icon: Terminal, id: "repos" },
+    { label: "Followers", value: stats.followers, icon: Users, id: "followers" },
+    { label: "Following", value: stats.following, icon: GitBranch, id: "following" },
   ];
 
   return (
     <div className="mt-12 pt-8 border-t border-slate-800/50 w-full max-w-2xl">
       <div className="flex flex-wrap justify-center gap-8 mb-8">
-        {statItems.map((item, index) => (
+        {statItems.map((item) => (
           <motion.div
-            key={index}
+            key={item.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 + index * 0.1 }}
+            transition={{ delay: 0.6 + statItems.indexOf(item) * 0.1 }}
             className="flex items-center gap-3"
           >
             <div className="p-2 rounded-lg bg-blue-500/10">
@@ -69,30 +85,27 @@ const GithubStats = ({ username }: { username: string }) => {
         ))}
       </div>
 
-      {/* GitHub Top Languages - Kartu Visual Dinamis */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
-        className="rounded-xl overflow-hidden border border-slate-800 bg-slate-900/50 p-6 flex flex-col items-center justify-center min-h-[150px]"
-      >
-        <p className="text-sm font-medium text-slate-400 mb-4">
-          Bahasa Pemrograman Teratas
-        </p>
-        <img
-          src={`https://github-readme-stats.vercel.app/api/top-langs?username=${username}&layout=compact&theme=tokyonight&hide_border=true&bg_color=0f172a&title_color=3b82f6&text_color=94a3b8`}
-          alt="Bahasa Pemrograman Teratas"
-          className="w-full h-auto max-w-[400px]"
-          loading="lazy"
-          onError={(e) => {
-            // Hide the component if image fails to load
-            (e.target as HTMLImageElement).parentElement?.style.setProperty(
-              "display",
-              "none",
-            );
-          }}
-        />
-      </motion.div>
+      {!imgError && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
+          className="rounded-xl overflow-hidden border border-slate-800 bg-slate-900/50 p-6 flex flex-col items-center justify-center min-h-[150px]"
+        >
+          <p className="text-sm font-medium text-slate-400 mb-4">
+            Bahasa Pemrograman Teratas
+          </p>
+          <img
+            src={`https://github-readme-stats.vercel.app/api/top-langs?username=${username}&layout=compact&theme=tokyonight&hide_border=true&bg_color=0f172a&title_color=3b82f6&text_color=94a3b8`}
+            alt="Most used programming languages on GitHub"
+            className="w-full h-auto max-w-[400px]"
+            width={400}
+            height={200}
+            loading="lazy"
+            onError={() => setImgError(true)}
+          />
+        </motion.div>
+      )}
     </div>
   );
 };
