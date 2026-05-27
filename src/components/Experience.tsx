@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
+import type { ExperienceItem } from "../types";
 
-const experiences = [
+const experiences: ExperienceItem[] = [
   {
+    id: "dtd-backend-intern",
     role: "Backend Engineer Intern",
     company: "Direktorat Transformasi Digital Universitas Indonesia",
     period: "Februari 2025 - Juli 2025 (6 Bulan)",
@@ -14,7 +16,6 @@ const experiences = [
       "Berkolaborasi dengan tim frontend untuk memastikan integrasi API yang mulus",
     ],
   },
-  // Anda bisa menambah pengalaman lain di sini
 ];
 
 const Experience = () => {
@@ -33,14 +34,13 @@ const Experience = () => {
         <div className="space-y-12">
           {experiences.map((exp, index) => (
             <motion.div
-              key={index}
+              key={exp.id}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
               className="relative pl-8 border-l-2 border-slate-800"
             >
-              {/* Timeline Dot */}
               <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-[#0f172a]" />
 
               <div className="bg-slate-800/30 p-6 rounded-2xl border border-slate-700">
@@ -63,11 +63,9 @@ const Experience = () => {
 
                 <ul className="list-disc list-inside space-y-2 text-slate-400 text-sm leading-relaxed [&_a]:text-blue-400 [&_a]:font-medium [&_a]:no-underline [&_a:hover]:underline [&_a]:underline-offset-4 [&_a]:transition-colors [&_a:hover]:text-blue-300">
                   {exp.description.map((item, i) => (
-                    <li
-                      key={i}
-                      className="pl-2 -indent-5 ml-5"
-                      dangerouslySetInnerHTML={{ __html: item }}
-                    ></li>
+                    <li key={i} className="pl-2 -indent-5 ml-5">
+                      {item}
+                    </li>
                   ))}
                 </ul>
               </div>
