@@ -1,19 +1,31 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Terminal, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+
+const navLinks = [
+  { name: "Beranda", to: "/#home" },
+  { name: "Keahlian", to: "/#skills" },
+  { name: "Pengalaman", to: "/#experience" },
+  { name: "Pendidikan", to: "/#education" },
+  { name: "Proyek", to: "/#projects" },
+  { name: "Kontak", to: "/#contact" },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const navLinks = [
-    { name: "Beranda", href: "/#home" },
-    { name: "Keahlian", href: "/#skills" },
-    { name: "Pengalaman", href: "/#experience" },
-    { name: "Pendidikan", href: "/#education" },
-    { name: "Proyek", href: "/#projects" },
-    { name: "Kontak", href: "/#contact" },
-  ];
+  const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
+  const closeMenu = useCallback(() => setIsOpen(false), []);
+
+  const handleNavClick = useCallback(
+    (to: string) => {
+      closeMenu();
+      navigate(to);
+    },
+    [closeMenu, navigate],
+  );
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#0f172a]/80 backdrop-blur-sm border-b border-slate-800">
@@ -27,13 +39,13 @@ const Navbar = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.to}
                   className="hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -41,8 +53,10 @@ const Navbar = () => {
           {/* Mobile Button */}
           <div className="md:hidden">
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-slate-400 hover:text-white focus:outline-none"
+              onClick={toggleMenu}
+              aria-label={isOpen ? "Tutup menu navigasi" : "Buka menu navigasi"}
+              aria-expanded={isOpen}
+              className="p-2 rounded-md text-slate-400 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               {isOpen ? (
                 <X className="w-6 h-6" />
@@ -65,14 +79,13 @@ const Navbar = () => {
           >
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="block hover:bg-slate-800 px-3 py-4 rounded-md text-base font-medium transition-colors"
+                  onClick={() => handleNavClick(link.to)}
+                  className="block w-full text-left hover:bg-slate-800 px-3 py-4 rounded-md text-base font-medium transition-colors"
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
             </div>
           </motion.div>
