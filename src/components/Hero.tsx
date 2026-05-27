@@ -66,7 +66,6 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Change 'octocat' to your real GitHub username */}
         <GithubStats username="adipppp" />
       </motion.div>
     </section>
