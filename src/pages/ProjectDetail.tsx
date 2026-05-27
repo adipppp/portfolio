@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Github, ExternalLink } from "lucide-react";
+import type { ProjectData } from "../types";
 
-const projectsData: Record<string, any> = {
+const projectsData: Record<string, ProjectData> = {
   "asrama-ui": {
     title: "Asrama UI API",
     description: "Sistem manajemen asrama Universitas Indonesia yang baru.",
@@ -183,7 +184,7 @@ const ProjectDetail = () => {
                   </a>
                 )}
                 {project.extraLinks &&
-                  project.extraLinks.map((link: any) => (
+                  project.extraLinks.map((link) => (
                     <a
                       key={link.url}
                       href={link.url}

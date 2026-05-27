@@ -1,17 +1,8 @@
 import { Database, Server, Cloud, Shield, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
+import type { SkillCardProps, CoreExpertise, SkillGroup } from "../types";
 
-const SkillCard = ({
-  icon: Icon,
-  title,
-  skills,
-  index,
-}: {
-  icon: any;
-  title: string;
-  skills: string[];
-  index: number;
-}) => (
+const SkillCard = ({ icon: Icon, title, skills, index }: SkillCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +28,7 @@ const SkillCard = ({
 );
 
 const Skills = () => {
-  const coreExpertise = [
+  const coreExpertise: CoreExpertise[] = [
     { name: "Go", rating: 4 },
     { name: "Java", rating: 4 },
     { name: "Google Cloud", rating: 4 },
@@ -46,7 +37,7 @@ const Skills = () => {
     { name: "Docker", rating: 4 },
   ];
 
-  const skillGroups = [
+  const skillGroups: SkillGroup[] = [
     {
       icon: Server,
       title: "Frameworks",

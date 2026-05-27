@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Calendar, MapPin } from "lucide-react";
+import type { EducationItem } from "../types";
 
-const education = [
+const education: EducationItem[] = [
   {
+    id: "universitas-indonesia",
     school: "Universitas Indonesia",
     degree: "S1 Ilmu Komputer",
     period: "2022 - Saat ini",
@@ -11,6 +13,7 @@ const education = [
       "Berfokus pada dasar-dasar ilmu komputer, pengembangan web, arsitektur sistem, dan infrastruktur jaringan/cloud.",
   },
   {
+    id: "sman-8-jakarta",
     school: "SMAN 8 Jakarta",
     degree: "MIPA",
     period: "2019 - 2022",
@@ -36,7 +39,7 @@ const Education = () => {
         <div className="space-y-12">
           {education.map((edu, index) => (
             <motion.div
-              key={index}
+              key={edu.id}
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}

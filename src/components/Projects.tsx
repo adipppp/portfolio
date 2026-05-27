@@ -1,8 +1,9 @@
 import { ExternalLink, Github, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import type { Project } from "../types";
 
-const projects = [
+const projects: Project[] = [
   {
     id: "asrama-ui",
     title: "Asrama UI API",
@@ -53,7 +54,7 @@ const Projects = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
-              key={index}
+              key={project.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
