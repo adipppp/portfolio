@@ -1,43 +1,7 @@
 import { ExternalLink, Github, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import type { Project } from "../types";
+import { projects } from "../data/projects";
 
-const projects: Project[] = [
-  {
-    id: "asrama-ui",
-    title: "Asrama UI API",
-    description:
-      "REST API untuk sistem manajemen asrama Universitas Indonesia. Memanfaatkan Fiber (Go) dan MongoDB untuk menghadirkan sistem pendaftaran hunian yang lebih andal dan efisien.",
-    tags: ["Go", "Fiber", "MongoDB", "REST API"],
-    github: "https://gitlab.ui.ac.id/dtd/asrama-ui-backend",
-    link: "https://residence.ui.ac.id",
-  },
-  {
-    id: "sso-system",
-    title: "OIDC Identity System",
-    description:
-      "Implementasi SSO berbasis OIDC pada Google Cloud untuk memvalidasi konektivitas dan keamanan antar jaringan (VPC & Firewall).",
-    tags: ["OIDC", "GCP", "VPC Network", "Cloud Firewall"],
-    github: "https://github.com/adipppp/ssoserver",
-  },
-  {
-    id: "booku-booklist",
-    title: "Book List Microservice",
-    description:
-      "Microservice REST API untuk manajemen buku dengan Spring Boot 3. Fokus pada clean architecture dan fleksibilitas query menggunakan JPA Specifications.",
-    tags: ["Spring Boot", "Java", "JPA Specs", "PostgreSQL"],
-    github: "https://github.com/AdPro-C8/BookU-be-bookList",
-  },
-  {
-    id: "marmut",
-    title: "Marmut (Mari Mutar Musik)",
-    description:
-      "Music player berbasis audio engine yang menerapkan arsitektur distributed systems untuk pemrosesan audio secara real-time.",
-    tags: ["Node.js", "Prisma", "Streams", "discord.js"],
-    github: "https://github.com/adipppp/marmut",
-  },
-];
 
 const Projects = () => {
   return (
@@ -68,8 +32,8 @@ const Projects = () => {
               }}
               className="flex flex-col h-full bg-slate-800/30 rounded-2xl border border-slate-700 overflow-hidden"
             >
-              <Link
-                to={`/projects/${project.id}`}
+              <a
+                href={`/projects/${project.id}`}
                 className="p-6 flex-1 flex flex-col text-left group"
               >
                 <h3 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors">
@@ -94,7 +58,7 @@ const Projects = () => {
                     <ChevronRight className="w-4 h-4" />
                   </div>
                 </div>
-              </Link>
+              </a>
               <div className="px-6 py-4 bg-slate-800/50 border-t border-slate-700 flex justify-between">
                 {project.github && (
                   <a

@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { Terminal, Menu, X } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -14,7 +14,6 @@ const navLinks = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
 
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
   const closeMenu = useCallback(() => setIsOpen(false), []);
@@ -22,30 +21,30 @@ const Navbar = () => {
   const handleNavClick = useCallback(
     (to: string) => {
       closeMenu();
-      navigate(to);
+      window.location.href = to;
     },
-    [closeMenu, navigate],
+    [closeMenu],
   );
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#0f172a]/80 backdrop-blur-sm border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2 group">
+          <a href="/" className="flex items-center gap-2 group">
             <Terminal className="text-blue-500 group-hover:rotate-12 transition-transform" />
-          </Link>
+          </a>
 
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.name}
-                  to={link.to}
+                  href={link.to}
                   className="hover:text-blue-500 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {link.name}
-                </Link>
+                </a>
               ))}
             </div>
           </div>

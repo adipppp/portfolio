@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectDetail from '../../components/ProjectDetail';
+import { projectsData } from "../../data/projects";
+
+export function getStaticPaths() {
+  const ids = Object.keys(projectsData);
+  return ids.map((id) => ({
+    params: { slug: id },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = projectsData[slug];
+---
+
+<Layout title={project ? `${project.title} - Portfolio` : 'Project Not Found'}>
+  <ProjectDetail slug={slug} client:load />
+</Layout>
