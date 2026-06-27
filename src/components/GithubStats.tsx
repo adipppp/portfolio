@@ -40,12 +40,7 @@ const GithubStats = ({ username }: { username: string }) => {
     return () => abortController.abort();
   }, [username]);
 
-  if (loading)
-    return (
-      <div className="animate-pulse text-slate-500 text-sm">
-        Loading GitHub stats...
-      </div>
-    );
+  if (loading) return null;
   if (!stats) return null;
 
   const statItems: {

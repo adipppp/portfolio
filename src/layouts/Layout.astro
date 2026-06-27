@@ -21,6 +21,21 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ClientRouter />
+    <style is:inline>
+      /* Hide main content until page is fully loaded to prevent FOUC */
+      html.js-loading main {
+        opacity: 0;
+      }
+      main {
+        transition: opacity 0.3s ease-out;
+      }
+    </style>
+    <script is:inline>
+      document.documentElement.classList.add('js-loading');
+      window.addEventListener('load', () => {
+        document.documentElement.classList.remove('js-loading');
+      });
+    </script>
   </head>
   <body>
     <div class="min-h-screen">
