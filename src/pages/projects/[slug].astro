@@ -12,6 +12,11 @@ export function getStaticPaths() {
 
 const { slug } = Astro.params;
 const project = projectsData[slug];
+
+if (!project) {
+  Astro.response.status = 404;
+  Astro.response.statusText = 'Not found';
+}
 ---
 
 <Layout title={project ? `${project.title} - Portfolio` : 'Project Not Found'}>
