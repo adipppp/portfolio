@@ -7,10 +7,8 @@ const GithubStats = ({ username }: { username: string }) => {
   const [stats, setStats] = useState<GithubUserStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [imgError, setImgError] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const abortController = new AbortController();
 
     const fetchStats = async () => {
@@ -42,14 +40,7 @@ const GithubStats = ({ username }: { username: string }) => {
     return () => abortController.abort();
   }, [username]);
 
-  if (loading) {
-    if (!isMounted) return null;
-    return (
-      <div className="animate-pulse text-slate-500 text-sm">
-        Loading GitHub stats...
-      </div>
-    );
-  }
+  if (loading) return null;
   if (!stats) return null;
 
   const statItems: {
