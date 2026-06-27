@@ -40,7 +40,11 @@ const GithubStats = ({ username }: { username: string }) => {
     return () => abortController.abort();
   }, [username]);
 
-  if (loading) return null;
+  if (loading) {
+    return (
+      <div className="mt-12 pt-8 w-full max-w-2xl min-h-[300px]"></div>
+    );
+  }
   if (!stats) return null;
 
   const statItems: {
