@@ -1,6 +1,6 @@
-import { Database, Server, Cloud, Shield, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
-import type { SkillCardProps, CoreExpertise, SkillGroup } from "../types";
+import type { SkillCardProps } from "../types";
+import { coreExpertise, skillGroups } from "../data/skills";
 
 const SkillCard = ({ icon: Icon, title, skills, index }: SkillCardProps) => (
   <motion.div
@@ -28,43 +28,6 @@ const SkillCard = ({ icon: Icon, title, skills, index }: SkillCardProps) => (
 );
 
 const Skills = () => {
-  const coreExpertise: CoreExpertise[] = [
-    { name: "Go", rating: 4 },
-    { name: "Java", rating: 4 },
-    { name: "Google Cloud", rating: 4 },
-    { name: "SQL", rating: 4 },
-    { name: "MongoDB", rating: 4 },
-    { name: "Docker", rating: 4 },
-  ];
-
-  const skillGroups: SkillGroup[] = [
-    {
-      icon: Server,
-      title: "Frameworks",
-      skills: ["Go", "Fiber", "Java", "Spring Boot", "Node.js"],
-    },
-    {
-      icon: Database,
-      title: "Databases",
-      skills: ["PostgreSQL", "MongoDB", "SQL", "Prisma"],
-    },
-    {
-      icon: Cloud,
-      title: "DevOps & Tools",
-      skills: ["Docker", "Kubernetes", "GCP", "CI/CD", "Git"],
-    },
-    {
-      icon: Cpu,
-      title: "Architecture",
-      skills: ["System Design", "Microservices", "Node.js Streams"],
-    },
-    {
-      icon: Shield,
-      title: "Security & Networking",
-      skills: ["OIDC", "VPC Network", "Cloud Firewall", "Subnetting"],
-    },
-  ];
-
   return (
     <section id="skills" className="py-20 px-4 bg-slate-900/50">
       <div className="max-w-7xl mx-auto">

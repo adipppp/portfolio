@@ -45,8 +45,7 @@ const Contact = () => {
     e.preventDefault();
     if (!validate()) return;
     // Form is ready for backend integration (Formspree / EmailJS / custom API).
-    // Currently logs the payload and shows a success state.
-    console.log("Contact form submission:", form);
+    // Currently shows a success state.
     setSubmitted(true);
   };
 

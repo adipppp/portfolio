@@ -39,6 +39,11 @@ const Projects = () => {
                 <h3 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors">
                   {project.title}
                 </h3>
+                {project.status === 'in-progress' && (
+                  <span className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider px-2 py-1 bg-amber-500/10 text-amber-400 rounded-md border border-amber-500/20 mb-3 w-max">
+                    In Progress
+                  </span>
+                )}
                 <p className="text-slate-400 mb-6 text-sm leading-relaxed">
                   {project.description}
                 </p>

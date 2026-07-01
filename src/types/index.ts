@@ -54,6 +54,7 @@ export interface Project {
   tags: string[];
   github?: string;
   link?: string;
+  status?: 'in-progress';
 }
 
 // ─── Project Detail ───────────────────────────────────
@@ -62,16 +63,24 @@ export interface ExtraLink {
   url: string;
 }
 
+export interface Milestone {
+  title: string;
+  problem: string;
+  concept: string;
+  conceptExplain: string;
+  outcome: string;
+}
+
 export interface ProjectData {
   title: string;
   description: string;
-  longDescription: string;
-  challenge: string;
-  solution: string;
+  intro: string;
+  milestones: Milestone[];
   techStack: string[];
   github?: string;
   demo?: string;
   extraLinks?: ExtraLink[];
+  status?: 'in-progress';
 }
 
 // ─── Contact Form ─────────────────────────────────────
