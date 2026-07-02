@@ -9,6 +9,7 @@ const navLinks = [
   { name: "Pengalaman", to: "/#experience" },
   { name: "Pendidikan", to: "/#education" },
   { name: "Proyek", to: "/#projects" },
+  { name: "Blog", to: "/blog" },
   { name: "Kontak", to: "/#contact" },
 ];
 
