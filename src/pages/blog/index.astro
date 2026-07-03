@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard';
+
+// Fetch all non-draft posts and sort by date descending
+const posts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? data.draft !== true : true;
+});
+
+const sortedPosts = posts.sort((a, b) => {
+  return b.data.pubDate.valueOf() - a.data.pubDate.valueOf();
+});
+---
+
+<Layout title="Blog - Fernanda Nadhiftya Putra">
+  <div class="pt-32 pb-20 px-4 max-w-7xl mx-auto">
+    <header class="mb-16 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-slate-100">
+        Blog & Catatan
+      </h1>
+      <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+        Kumpulan tulisan mengenai eksplorasi teknologi, pengalaman pengembangan perangkat lunak, dan catatan personal.
+      </p>
+    </header>
+
+    {sortedPosts.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {sortedPosts.map((post) => (
+          <BlogCard
+            client:load
+            slug={post.id}
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="text-center py-20 text-slate-400">
+        <p>Belum ada tulisan saat ini.</p>
+      </div>
+    )}
+  </div>
+</Layout>
