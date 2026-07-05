@@ -1,85 +1,50 @@
 import { motion } from "framer-motion";
-import type { SkillCardProps } from "../types";
-import { coreExpertise, skillGroups } from "../data/skills";
-
-const SkillCard = ({ icon: Icon, title, skills, index }: SkillCardProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay: index * 0.1, duration: 0.5 }}
-    className="p-6 rounded-2xl bg-slate-800/50 border border-slate-700 hover:border-blue-500/50 transition-all"
-  >
-    <div className="flex items-center gap-3 mb-4">
-      <Icon className="w-6 h-6 text-blue-500" />
-      <h3 className="font-semibold text-lg">{title}</h3>
-    </div>
-    <div className="flex flex-wrap gap-2">
-      {skills.map((skill) => (
-        <span
-          key={skill}
-          className="px-3 py-1 text-sm rounded-full bg-slate-900 text-slate-400"
-        >
-          {skill}
-        </span>
-      ))}
-    </div>
-  </motion.div>
-);
+import { skillGroups } from "../data/skills";
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 px-4 bg-slate-900/50">
+    <section id="skills" className="py-20 px-4 border-t border-zinc-900 bg-zinc-950/20">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-3xl font-bold mb-12 text-center"
+          className="text-3xl font-bold mb-16 text-center text-zinc-50 font-sans"
         >
-          Keahlian Teknis
+          Core Competencies
         </motion.h2>
 
-        {/* Core Expertise Progress Bars */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 max-w-4xl mx-auto">
-          {coreExpertise.map((item, index) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <div className="flex justify-between mb-2">
-                <span className="font-medium text-slate-300">{item.name}</span>
-                <span className="text-blue-400">{item.rating}/5</span>
-              </div>
-              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: `${(item.rating / 5) * 100}%` }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                  className="h-full bg-gradient-to-r from-blue-600 to-blue-400"
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="flex flex-col gap-6 max-w-5xl mx-auto">
-          {/* Row 1: 3 Groups */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {skillGroups.slice(0, 3).map((group, index) => (
-              <SkillCard key={group.title} {...group} index={index} />
-            ))}
-          </div>
-          {/* Row 2: 2 Groups */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto w-full">
-            {skillGroups.slice(3, 5).map((group, index) => (
-              <SkillCard key={group.title} {...group} index={index + 3} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillGroups.map((group, index) => {
+            const Icon = group.icon;
+            return (
+              <motion.div 
+                key={group.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/50 hover:border-cyan-500/30 hover:shadow-lg hover:shadow-cyan-500/5 transition-all"
+              >
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                    <Icon className="w-5 h-5 text-cyan-400" />
+                  </div>
+                  <h4 className="font-bold text-zinc-100 text-lg">{group.title}</h4>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {group.skills.map((skill) => (
+                    <span 
+                      key={skill}
+                      className="px-3 py-1.5 rounded-lg bg-zinc-950 text-zinc-400 border border-zinc-800 font-mono text-xs"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
