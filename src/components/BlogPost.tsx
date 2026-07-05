@@ -30,7 +30,7 @@ const BlogPost = ({ title, pubDate, tags, children }: Props) => {
       </a>
 
       <header className="mb-12 border-b border-zinc-900 pb-8">
-        <div className="flex items-center gap-2 text-zinc-500 text-sm mb-4 font-mono">
+        <div className="flex items-center gap-2 text-zinc-400 text-sm mb-4 font-mono">
           <CalendarDays className="w-4 h-4 text-zinc-600" />
           <time dateTime={pubDate.toISOString()}>{formattedDate}</time>
         </div>
@@ -43,7 +43,7 @@ const BlogPost = ({ title, pubDate, tags, children }: Props) => {
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 rounded bg-zinc-900 text-zinc-450 border border-zinc-800 font-mono text-xs"
+              className="px-2 py-0.5 rounded bg-zinc-900 text-zinc-400 border border-zinc-800 font-mono text-xs"
             >
               #{tag}
             </span>

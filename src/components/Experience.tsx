@@ -38,7 +38,7 @@ const Experience = () => {
                       <Briefcase className="w-4 h-4" /> {exp.company}
                     </div>
                   </div>
-                  <div className="flex flex-col text-xs text-zinc-500 font-mono md:items-end gap-1">
+                  <div className="flex flex-col text-xs text-zinc-400 font-mono md:items-end gap-1">
                     <div className="flex items-center gap-1.5">
                       <Calendar className="w-3.5 h-3.5 text-zinc-600" /> {exp.period}
                     </div>

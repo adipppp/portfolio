@@ -76,7 +76,7 @@ const About = () => {
                       {group.skills.map((skill) => (
                         <span 
                           key={skill}
-                          className="px-2 py-0.5 rounded bg-zinc-950 text-zinc-400 border border-zinc-850 font-mono text-xs"
+                          className="px-2 py-0.5 rounded bg-zinc-950 text-zinc-400 border border-zinc-800 font-mono text-xs"
                         >
                           {skill}
                         </span>

@@ -38,12 +38,12 @@ const Education = () => {
                       {edu.degree} <GraduationCap className="w-4 h-4 text-cyan-500" />
                     </div>
                   </div>
-                  <div className="flex flex-col text-xs text-zinc-500 font-mono md:items-start text-left gap-1">
+                  <div className="flex flex-col text-xs text-zinc-400 font-mono md:items-start text-left gap-1">
                     <div className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-zinc-650" /> {edu.period}
+                      <Calendar className="w-3.5 h-3.5 text-zinc-400" /> {edu.period}
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-zinc-650" /> {edu.location}
+                      <MapPin className="w-3.5 h-3.5 text-zinc-400" /> {edu.location}
                     </div>
                   </div>
                 </div>

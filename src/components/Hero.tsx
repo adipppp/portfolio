@@ -59,7 +59,7 @@ const Hero = () => {
           </a>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-900 hover:bg-zinc-850 text-zinc-300 font-semibold rounded-xl transition-all border border-zinc-800"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-zinc-800/80 hover:bg-zinc-700 text-zinc-300 font-semibold rounded-xl transition-all border border-zinc-700"
           >
             Contact Me
           </a>
@@ -87,7 +87,7 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="grid grid-cols-3 gap-8 max-w-lg w-full py-4 border-y border-zinc-900 font-mono text-sm text-zinc-500 mb-12"
+          className="grid grid-cols-3 gap-8 max-w-lg w-full py-4 border-y border-zinc-900 font-mono text-sm text-zinc-400 mb-12"
         >
           <div>
             <span className="block text-zinc-300 font-bold text-lg">5+</span>

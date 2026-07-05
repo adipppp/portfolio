@@ -51,7 +51,7 @@ const ProjectDetail = ({ slug: id }: Props) => {
             {project.techStack.map((tech: string) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-xs rounded bg-zinc-900 text-zinc-450 border border-zinc-800 font-mono"
+                className="px-3 py-1 text-xs rounded bg-zinc-900 text-zinc-400 border border-zinc-800 font-mono"
               >
                 {tech}
               </span>
@@ -84,7 +84,7 @@ const ProjectDetail = ({ slug: id }: Props) => {
 
                   {/* Problem */}
                   <div className="ml-10 mb-4 text-zinc-400 text-sm leading-relaxed">
-                    <span className="block text-zinc-500 font-mono text-[10px] uppercase tracking-wider mb-1">The Problem</span>
+                    <span className="block text-zinc-400 font-mono text-[10px] uppercase tracking-wider mb-1">The Problem</span>
                     {milestone.problem}
                   </div>
 
@@ -103,7 +103,7 @@ const ProjectDetail = ({ slug: id }: Props) => {
 
                   {/* Outcome */}
                   <div className="ml-10 text-zinc-300 text-sm leading-relaxed">
-                    <span className="block text-zinc-500 font-mono text-[10px] uppercase tracking-wider mb-1">Outcome</span>
+                    <span className="block text-zinc-400 font-mono text-[10px] uppercase tracking-wider mb-1">Outcome</span>
                     {milestone.outcome}
                   </div>
                 </div>
@@ -121,9 +121,10 @@ const ProjectDetail = ({ slug: id }: Props) => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-zinc-450 hover:text-zinc-200 transition-colors text-sm font-mono"
+                    aria-label="Open source code in a new tab"
+                    className="flex items-center gap-3 text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-mono"
                   >
-                    <Github className="w-4 h-4 text-zinc-500" /> Source Code
+                    <Github className="w-4 h-4 text-zinc-400" /> Source Code
                   </a>
                 )}
                 {project.demo && project.demo !== "#" && (
@@ -131,9 +132,10 @@ const ProjectDetail = ({ slug: id }: Props) => {
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 text-zinc-450 hover:text-zinc-200 transition-colors text-sm font-mono"
+                    aria-label="Open live demo in a new tab"
+                    className="flex items-center gap-3 text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-mono"
                   >
-                    <ExternalLink className="w-4 h-4 text-zinc-500" /> Live Demo
+                    <ExternalLink className="w-4 h-4 text-zinc-400" /> Live Demo
                   </a>
                 )}
               </div>

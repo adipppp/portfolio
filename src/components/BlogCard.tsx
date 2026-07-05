@@ -24,7 +24,7 @@ const BlogCard = ({ slug, title, description, pubDate, tags }: Props) => {
       className="group relative flex flex-col justify-between p-6 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-cyan-500/30 transition-all h-full"
     >
       <div>
-        <div className="flex items-center gap-2 text-zinc-500 text-sm mb-4 font-mono">
+        <div className="flex items-center gap-2 text-zinc-400 text-sm mb-4 font-mono">
           <CalendarDays className="w-4 h-4 text-zinc-600" />
           <time dateTime={pubDate.toISOString()}>{formattedDate}</time>
         </div>
@@ -36,7 +36,7 @@ const BlogCard = ({ slug, title, description, pubDate, tags }: Props) => {
           </a>
         </h3>
         
-        <p className="text-zinc-450 leading-relaxed mb-6 text-sm">
+        <p className="text-zinc-400 leading-relaxed mb-6 text-sm">
           {description}
         </p>
       </div>
@@ -46,7 +46,7 @@ const BlogCard = ({ slug, title, description, pubDate, tags }: Props) => {
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 rounded bg-zinc-950 text-zinc-450 border border-zinc-850 font-mono text-xs"
+              className="px-2 py-0.5 rounded bg-zinc-950 text-zinc-400 border border-zinc-800 font-mono text-xs"
             >
               #{tag}
             </span>

@@ -45,14 +45,19 @@ const Projects = () => {
                 </p>
                 <div className="mt-auto">
                   <div className="flex flex-wrap gap-1.5 mb-6">
-                    {project.tags.map((tag) => (
+                    {project.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 bg-zinc-950 text-zinc-400 rounded border border-zinc-850"
+                        className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 bg-zinc-950 text-zinc-400 rounded border border-zinc-800"
                       >
                         {tag}
                       </span>
                     ))}
+                    {project.tags.length > 3 && (
+                      <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 bg-zinc-950 text-zinc-400 rounded border border-zinc-800">
+                        +{project.tags.length - 3}
+                      </span>
+                    )}
                   </div>
                   <div className="inline-flex items-center gap-1 text-sm font-semibold text-cyan-400 group-hover:text-cyan-300 transition-colors mb-4">
                     View Details
@@ -60,15 +65,17 @@ const Projects = () => {
                   </div>
                 </div>
               </a>
-              <div className="px-6 py-4 bg-zinc-900/40 border-t border-zinc-800/50 flex justify-between">
+              <div className="px-6 py-4 bg-zinc-900/40 border-t border-zinc-800/50 flex gap-4">
                 {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 transition-colors font-mono"
+                    aria-label="Open source code in a new tab"
+                    className="flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-cyan-400 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <Github className="w-4 h-4 text-zinc-500" /> code
+                    <Github className="w-4 h-4 text-zinc-400" /> code
                   </a>
                 )}
                 {project.link && (
@@ -76,9 +83,11 @@ const Projects = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 transition-colors font-mono"
+                    aria-label="Open live demo in a new tab"
+                    className="flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-cyan-400 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <ExternalLink className="w-4 h-4 text-zinc-500" /> demo
+                    <ExternalLink className="w-4 h-4 text-zinc-400" /> demo
                   </a>
                 )}
               </div>
