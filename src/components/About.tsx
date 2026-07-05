@@ -11,7 +11,7 @@ const About = () => {
           viewport={{ once: true }}
           className="text-3xl font-bold mb-16 text-center text-zinc-50 font-sans"
         >
-          About & Core Competencies
+          About Me
         </motion.h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -24,20 +24,10 @@ const About = () => {
             className="lg:col-span-7 space-y-6 text-zinc-400 leading-relaxed text-lg"
           >
             <p>
-              I'm a computer science student at Universitas Indonesia building
-              production-grade backend systems and APIs.
+              I'm a Computer Science student at Universitas Indonesia. My focus is on backend architecture, infrastructure, and systems programming—diving into the parts of software that most people don't see.
             </p>
             <p>
-              I'm drawn to the parts of software that most people don't see:
-              how schedulers allocate CPU time, why GPU memory access patterns
-              matter more than raw compute, and how an application becomes a bottleneck when
-              media processing and business logic share the same thread. I learn best
-              by building things until they break — and then understanding exactly why.
-            </p>
-            <p>
-              Most of my work spans high-performance REST APIs, background job architectures,
-              and orchestration pipelines. My ideal playground is at the intersection of infrastructure,
-              backend architecture, and DevOps.
+              I'm naturally drawn to understanding how things work under the hood: how schedulers allocate CPU time, why GPU memory access patterns matter, and how applications become bottlenecks under heavy load. I learn best by building things until they break—and then understanding exactly why.
             </p>
 
             {/* Accent block for personality */}
