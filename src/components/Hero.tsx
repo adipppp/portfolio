@@ -29,9 +29,9 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="text-4xl md:text-6xl font-bold mb-6 tracking-tight leading-tight text-zinc-50 font-sans"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight leading-tight text-zinc-50 font-sans"
         >
-          I build production systems — from REST APIs and background job pipelines to distributed HPC infrastructure.
+          Building reliable backend services and exploring systems architecture.
         </motion.h1>
         
         <motion.p
