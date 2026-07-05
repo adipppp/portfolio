@@ -1,102 +1,149 @@
-import { ExternalLink, Github, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { projects } from "../data/projects";
 
-const Projects = () => {
-  return (
-    <section id="projects" className="py-20 px-4 bg-zinc-950/40 border-t border-zinc-900">
-      <div className="max-w-7xl mx-auto">
-        <motion.h2
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-3xl font-bold mb-12 text-center text-zinc-50 font-sans"
+const Projects = () => (
+  <section
+    id="projects"
+    className="py-20 px-6 sm:px-8"
+    style={{ borderTop: "1px solid var(--color-border)" }}
+  >
+    <div className="max-w-5xl mx-auto">
+
+      {/* Section header */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="flex items-baseline justify-between pb-3 mb-1"
+        style={{ borderBottom: "1px solid var(--color-border)" }}
+      >
+        <h2
+          className="text-2xl font-bold"
+          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
         >
-          Featured Projects
-        </motion.h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.5,
-                delay: index * 0.1,
+          Selected Work
+        </h2>
+        <span
+          className="text-xs"
+          style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-2)" }}
+        >
+          {projects.length} projects
+        </span>
+      </motion.div>
+
+      {/* Project list — editorial numbered entries */}
+      <div>
+        {projects.map((project, index) => (
+          <motion.a
+            key={project.id}
+            href={`/projects/${project.id}`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: index * 0.07 }}
+            className="group grid py-7 no-underline"
+            style={{
+              gridTemplateColumns: "48px 1fr",
+              gap: "0 1.25rem",
+              borderBottom: "1px solid var(--color-border)",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            {/* Number in margin */}
+            <span
+              className="font-bold leading-tight pt-1 transition-colors duration-200"
+              style={{
+                fontFamily: "var(--font-serif)",
+                fontSize: "1.5rem",
+                color: "var(--color-border)",
               }}
-              className="flex flex-col h-full bg-zinc-900/20 rounded-2xl border border-zinc-800/80 overflow-hidden hover:-translate-y-2 hover:border-cyan-500/30 hover:shadow-2xl hover:shadow-cyan-500/5 transition-all duration-300 group"
             >
-              <a
-                href={`/projects/${project.id}`}
-                className="p-6 flex-1 flex flex-col text-left"
+              {String(index + 1).padStart(2, "0")}
+            </span>
+
+            {/* Content */}
+            <div>
+              {/* Eyebrow — first 3 tags as readable label */}
+              <p
+                className="text-xs uppercase tracking-widest mb-1"
+                style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)" }}
               >
-                <h3 className="text-xl font-bold mb-3 text-zinc-100 group-hover:text-cyan-400 transition-colors">
+                {project.tags.slice(0, 3).join(" · ")}
+              </p>
+
+              {/* Title */}
+              <h3
+                className="font-bold mb-2 transition-colors duration-200"
+                style={{
+                  fontFamily: "var(--font-serif)",
+                  fontSize: "1.125rem",
+                  color: "var(--color-text)",
+                  lineHeight: 1.3,
+                }}
+              >
+                <span className="group-hover:text-[var(--color-accent)]"
+                  style={{ transition: "color 0.2s" }}>
                   {project.title}
-                </h3>
-                {project.status === 'in-progress' && (
-                  <span className="inline-flex items-center gap-1 text-[10px] uppercase font-bold tracking-wider px-2 py-1 bg-amber-500/10 text-amber-400 rounded-md border border-amber-500/20 mb-3 w-max font-mono">
-                    In Progress
+                </span>
+              </h3>
+
+              {/* Description */}
+              <p
+                className="text-sm leading-relaxed mb-3"
+                style={{ color: "var(--color-text-2)", maxWidth: "600px" }}
+              >
+                {project.description}
+              </p>
+
+              {/* Footer: remaining tags + in-progress + arrow */}
+              <div className="flex items-center gap-2 flex-wrap">
+                {project.tags.slice(0, 4).map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs px-2 py-0.5 rounded-sm"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      background: "var(--color-tag)",
+                      color: "var(--color-text-2)",
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+                {project.tags.length > 4 && (
+                  <span
+                    className="text-xs"
+                    style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-2)" }}
+                  >
+                    +{project.tags.length - 4} more
                   </span>
                 )}
-                <p className="text-zinc-400 mb-6 text-sm leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="mt-auto">
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    {project.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 bg-zinc-950 text-zinc-400 rounded border border-zinc-800"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.tags.length > 3 && (
-                      <span className="text-[10px] uppercase font-mono tracking-wider px-2 py-0.5 bg-zinc-950 text-zinc-400 rounded border border-zinc-800">
-                        +{project.tags.length - 3}
-                      </span>
-                    )}
-                  </div>
-                  <div className="inline-flex items-center gap-1 text-sm font-semibold text-cyan-400 group-hover:text-cyan-300 transition-colors mb-4">
-                    View Details
-                    <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </a>
-              <div className="px-6 py-4 bg-zinc-900/40 border-t border-zinc-800/50 flex gap-4">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open source code in a new tab"
-                    className="flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-cyan-400 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
+                {project.status === "in-progress" && (
+                  <span
+                    className="text-xs px-2 py-0.5 border rounded-sm ml-1"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      borderColor: "var(--color-amber)",
+                      color: "var(--color-amber)",
+                    }}
                   >
-                    <Github className="w-4 h-4 text-zinc-400" /> code
-                  </a>
+                    in progress
+                  </span>
                 )}
-                {project.link && (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Open live demo in a new tab"
-                    className="flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-cyan-400 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <ExternalLink className="w-4 h-4 text-zinc-400" /> demo
-                  </a>
-                )}
+                <span
+                  className="ml-auto text-xs transition-colors duration-200"
+                  style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-2)" }}
+                >
+                  read more →
+                </span>
               </div>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+          </motion.a>
+        ))}
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default Projects;

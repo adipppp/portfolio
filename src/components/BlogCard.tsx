@@ -21,22 +21,29 @@ const BlogCard = ({ slug, title, description, pubDate, tags }: Props) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="group relative flex flex-col justify-between p-6 bg-zinc-900/20 border border-zinc-800/80 rounded-3xl hover:border-cyan-500/30 transition-all h-full"
+      className="group relative flex flex-col justify-between p-6 rounded-sm transition-all h-full"
+      style={{
+        background: "var(--color-surface)",
+        border: "1px solid var(--color-border)",
+      }}
     >
       <div>
-        <div className="flex items-center gap-2 text-zinc-400 text-sm mb-4 font-mono">
-          <CalendarDays className="w-4 h-4 text-zinc-600" />
+        <div className="flex items-center gap-2 text-sm mb-4 font-mono" style={{ color: "var(--color-text-2)" }}>
+          <CalendarDays className="w-4 h-4" style={{ color: "var(--color-border)" }} />
           <time dateTime={pubDate.toISOString()}>{formattedDate}</time>
         </div>
         
-        <h3 className="text-2xl font-bold text-zinc-100 mb-3 group-hover:text-cyan-400 transition-colors">
+        <h3 
+          className="text-xl font-bold mb-3 transition-colors group-hover:opacity-80"
+          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+        >
           <a href={`/blog/${slug}`}>
             <span className="absolute inset-0"></span>
             {title}
           </a>
         </h3>
         
-        <p className="text-zinc-400 leading-relaxed mb-6 text-sm">
+        <p className="leading-relaxed mb-6 text-sm" style={{ color: "var(--color-text-2)" }}>
           {description}
         </p>
       </div>
@@ -46,14 +53,22 @@ const BlogCard = ({ slug, title, description, pubDate, tags }: Props) => {
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-2 py-0.5 rounded bg-zinc-950 text-zinc-400 border border-zinc-800 font-mono text-xs"
+              className="px-2 py-0.5 rounded-sm font-mono text-xs"
+              style={{
+                background: "var(--color-tag)",
+                color: "var(--color-text-2)",
+                border: "1px solid var(--color-border)",
+              }}
             >
               #{tag}
             </span>
           ))}
         </div>
 
-        <div className="flex items-center gap-2 text-sm font-semibold text-cyan-400 group-hover:gap-3 transition-all">
+        <div 
+          className="flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all"
+          style={{ color: "var(--color-accent)" }}
+        >
           Read More <ArrowRight className="w-4 h-4" />
         </div>
       </div>

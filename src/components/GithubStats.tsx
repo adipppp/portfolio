@@ -59,24 +59,36 @@ const GithubStats = ({ username }: { username: string }) => {
   ];
 
   return (
-    <div className="mt-12 pt-8 border-t border-slate-800/50 w-full max-w-2xl">
+    <div className="mt-12 pt-8 w-full max-w-2xl" style={{ borderTop: "1px solid var(--color-border)" }}>
       <div className="flex flex-wrap justify-center gap-8 mb-8">
         {statItems.map((item) => (
           <motion.div
             key={item.id}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 + statItems.indexOf(item) * 0.1 }}
+            transition={{ delay: 0.2 + statItems.indexOf(item) * 0.05 }}
             className="flex items-center gap-3"
           >
-            <div className="p-2 rounded-lg bg-blue-500/10">
-              <item.icon className="w-4 h-4 text-blue-400" />
+            <div 
+              className="p-2 rounded-sm"
+              style={{
+                background: "var(--color-accent-dim)",
+                border: "1px solid var(--color-accent)",
+              }}
+            >
+              <item.icon className="w-4 h-4" style={{ color: "var(--color-accent)" }} />
             </div>
             <div className="text-left">
-              <div className="text-xl font-bold text-white leading-none">
+              <div 
+                className="text-xl font-bold leading-none"
+                style={{ color: "var(--color-text)", fontFamily: "var(--font-serif)" }}
+              >
                 {item.value}
               </div>
-              <div className="text-xs text-slate-500 uppercase tracking-wider mt-1">
+              <div 
+                className="text-[10px] uppercase tracking-widest mt-1"
+                style={{ color: "var(--color-text-2)", fontFamily: "var(--font-mono)" }}
+              >
                 {item.label}
               </div>
             </div>
@@ -86,16 +98,23 @@ const GithubStats = ({ username }: { username: string }) => {
 
       {!imgError && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="rounded-xl overflow-hidden border border-slate-800 bg-slate-900/50 p-6 flex flex-col items-center justify-center min-h-[150px]"
+          transition={{ delay: 0.5, duration: 0.5 }}
+          className="rounded-sm overflow-hidden p-6 flex flex-col items-center justify-center min-h-[150px]"
+          style={{
+            background: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
+          }}
         >
-          <p className="text-sm font-medium text-slate-400 mb-4">
-            Bahasa Pemrograman Teratas
+          <p 
+            className="text-[10px] uppercase tracking-widest mb-4"
+            style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-2)" }}
+          >
+            Top Programming Languages
           </p>
           <img
-            src={`https://github-readme-stats.vercel.app/api/top-langs?username=${username}&layout=compact&theme=tokyonight&hide_border=true&bg_color=0f172a&title_color=3b82f6&text_color=94a3b8`}
+            src={`https://github-readme-stats.vercel.app/api/top-langs?username=${username}&layout=compact&hide_border=true&bg_color=ECE7D8&title_color=2B4A36&text_color=6B5C50&icon_color=2B4A36`}
             alt="Most used programming languages on GitHub"
             className="w-full h-auto max-w-[400px]"
             width={400}

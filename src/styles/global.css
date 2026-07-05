@@ -1,45 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ─── Google Fonts ────────────────────────────────────────────── */
+
+/* ─── Design tokens ───────────────────────────────────────────── */
 @theme {
-  --font-sans: "Inter", "Geist", system-ui, -apple-system, sans-serif;
-  --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  /* Typography */
+  --font-serif:  "IBM Plex Serif", Georgia, serif;
+  --font-sans:   "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --font-mono:   "IBM Plex Mono", "Geist Mono", ui-monospace, monospace;
+
+  /* Palette — warm parchment + forest-green ink */
+  --color-bg:          #F5F1E8;   /* parchment background  */
+  --color-surface:     #ECE7D8;   /* slightly darker surface / card bg */
+  --color-border:      #CEC5B0;   /* warm tan border */
+  --color-text:        #1A1614;   /* near-black warm */
+  --color-text-2:      #6B5C50;   /* warm muted brown */
+  --color-accent:      #2B4A36;   /* forest green — primary accent */
+  --color-accent-dim:  rgba(43, 74, 54, 0.09);
+  --color-tag:         #E3DDD0;   /* tag pill background */
+  --color-amber:       #B07D2A;   /* "in progress" status */
 }
 
+/* ─── Base ───────────────────────────────────────────────────── */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   font-family: var(--font-sans);
-}
-
-body {
-  @apply bg-[#09090b] text-zinc-300 antialiased selection:bg-cyan-500/30;
-  margin: 0;
-  background-image:
-    radial-gradient(at 0% 0%, rgba(34, 211, 238, 0.08) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(249, 115, 22, 0.03) 0px, transparent 50%);
-  background-attachment: fixed;
 }
 
 html {
   scroll-behavior: smooth;
-  scrollbar-color: #18181b #09090b;
+  scrollbar-color: var(--color-border) var(--color-bg);
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  line-height: 1.6;
 }
 
-::-webkit-scrollbar-track {
-  background: #09090b;
-}
+/* ─── Custom scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; border: 2px solid var(--color-bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-2); }
 
-::-webkit-scrollbar-thumb {
-  background: #18181b;
-  border-radius: 5px;
-  border: 2px solid #09090b;
-}
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection { background: rgba(43, 74, 54, 0.18); }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #27272a;
-}
+/* ─── Focus ──────────────────────────────────────────────────── */
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }

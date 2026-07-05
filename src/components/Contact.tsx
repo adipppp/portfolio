@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import type { ContactFormData } from "../types";
 
 const inputBase =
-  "w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 focus:outline-none focus:border-cyan-500 transition-colors text-zinc-300 font-mono text-sm";
+  "w-full bg-surface border border-border rounded-sm px-4 py-3 focus:outline-none focus:border-accent transition-colors text-text font-mono text-sm";
 const inputInvalid =
-  "w-full bg-zinc-950 border border-red-500 rounded-lg px-4 py-3 focus:outline-none focus:border-red-500 transition-colors text-zinc-300 font-mono text-sm";
+  "w-full bg-surface border border-red-800 rounded-sm px-4 py-3 focus:outline-none focus:border-red-800 transition-colors text-text font-mono text-sm";
 
 const Contact = () => {
   const [form, setForm] = useState<ContactFormData>({
@@ -49,17 +49,24 @@ const Contact = () => {
 
   if (submitted) {
     return (
-      <section id="contact" className="py-20 px-4">
+      <section id="contact" className="py-20 px-6 sm:px-8">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="max-w-3xl mx-auto bg-zinc-900/20 border border-zinc-800/80 p-8 md:p-12 rounded-3xl shadow-2xl text-center"
+          className="max-w-3xl mx-auto p-8 md:p-12 rounded-sm text-center"
+          style={{
+            background: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
+          }}
         >
-          <CheckCircle className="w-16 h-16 text-cyan-400 mx-auto mb-6" />
-          <h2 className="text-3xl font-bold mb-4 text-white">
+          <CheckCircle className="w-12 h-12 mx-auto mb-6" style={{ color: "var(--color-accent)" }} />
+          <h2 
+            className="text-2xl font-bold mb-4"
+            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          >
             Message Sent!
           </h2>
-          <p className="text-zinc-400 mb-8">
+          <p className="mb-8 text-sm" style={{ color: "var(--color-text-2)" }}>
             Thank you! I will get back to you shortly.
           </p>
           <button
@@ -68,7 +75,8 @@ const Contact = () => {
               setForm({ name: "", email: "", message: "" });
               setErrors({});
             }}
-            className="text-cyan-400 hover:underline font-mono"
+            className="hover:underline font-mono text-sm"
+            style={{ color: "var(--color-accent)" }}
           >
             Send another message
           </button>
@@ -78,23 +86,38 @@ const Contact = () => {
   }
 
   return (
-    <section id="contact" className="py-20 px-4 border-t border-zinc-900 bg-zinc-950/20">
+    <section 
+      id="contact" 
+      className="py-20 px-6 sm:px-8"
+      style={{ borderTop: "1px solid var(--color-border)" }}
+    >
       <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
+        initial={{ opacity: 0, scale: 0.98 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="max-w-3xl mx-auto bg-zinc-900/20 border border-zinc-800/80 p-8 md:p-12 rounded-3xl shadow-2xl"
+        transition={{ duration: 0.55 }}
+        className="max-w-3xl mx-auto p-8 md:p-12 rounded-sm"
+        style={{
+          background: "var(--color-surface)",
+          border: "1px solid var(--color-border)",
+        }}
       >
-        <h2 className="text-3xl font-bold mb-4 text-center text-white">
+        <h2 
+          className="text-2xl font-bold mb-4 text-center"
+          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+        >
           Get In Touch
         </h2>
-        <p className="text-zinc-400 text-center mb-10">
+        <p 
+          className="text-center mb-10 text-sm leading-relaxed"
+          style={{ color: "var(--color-text-2)" }}
+        >
           Interested in working together or have a question? Leave a message
           below or email me directly at{" "}
           <a
             href="mailto:fernanda.nadhiftya@gmail.com"
-            className="text-cyan-400 hover:underline"
+            className="hover:underline font-semibold"
+            style={{ color: "var(--color-accent)" }}
           >
             fernanda.nadhiftya@gmail.com
           </a>
@@ -105,7 +128,8 @@ const Contact = () => {
             <div>
               <label
                 htmlFor="contact-name"
-                className="block text-sm font-medium text-zinc-300 mb-2 font-mono"
+                className="block text-xs uppercase tracking-wider mb-2 font-mono"
+                style={{ color: "var(--color-text-2)" }}
               >
                 Name
               </label>
@@ -121,7 +145,7 @@ const Contact = () => {
                 aria-describedby={errors.name ? "contact-name-error" : undefined}
               />
               {errors.name && (
-                <p id="contact-name-error" className="mt-1 text-sm text-red-400 font-mono">
+                <p id="contact-name-error" className="mt-1 text-sm text-red-800 font-mono">
                   {errors.name}
                 </p>
               )}
@@ -129,7 +153,8 @@ const Contact = () => {
             <div>
               <label
                 htmlFor="contact-email"
-                className="block text-sm font-medium text-zinc-300 mb-2 font-mono"
+                className="block text-xs uppercase tracking-wider mb-2 font-mono"
+                style={{ color: "var(--color-text-2)" }}
               >
                 Email
               </label>
@@ -145,7 +170,7 @@ const Contact = () => {
                 aria-describedby={errors.email ? "contact-email-error" : undefined}
               />
               {errors.email && (
-                <p id="contact-email-error" className="mt-1 text-sm text-red-400 font-mono">
+                <p id="contact-email-error" className="mt-1 text-sm text-red-800 font-mono">
                   {errors.email}
                 </p>
               )}
@@ -154,7 +179,8 @@ const Contact = () => {
           <div>
             <label
               htmlFor="contact-message"
-              className="block text-sm font-medium text-zinc-300 mb-2 font-mono"
+              className="block text-xs uppercase tracking-wider mb-2 font-mono"
+              style={{ color: "var(--color-text-2)" }}
             >
               Message
             </label>
@@ -170,19 +196,22 @@ const Contact = () => {
               aria-describedby={errors.message ? "contact-message-error" : undefined}
             ></textarea>
             {errors.message && (
-              <p id="contact-message-error" className="mt-1 text-sm text-red-400 font-mono">
+              <p id="contact-message-error" className="mt-1 text-sm text-red-800 font-mono">
                 {errors.message}
               </p>
             )}
           </div>
           <motion.button
             type="submit"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="w-full bg-cyan-600 hover:bg-cyan-500 text-zinc-950 font-bold py-4 px-6 rounded-lg flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            className="w-full py-3.5 px-6 rounded-sm flex items-center justify-center gap-2 transition-opacity cursor-pointer font-semibold text-sm"
+            style={{
+              background: "var(--color-accent)",
+              color: "var(--color-bg)",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
+            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
           >
-            <Send className="w-5 h-5" /> Send Message
+            <Send className="w-4 h-4" /> Send Message
           </motion.button>
         </form>
       </motion.div>

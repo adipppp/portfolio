@@ -3,13 +3,18 @@ import { skillGroups } from "../data/skills";
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-20 px-4 border-t border-zinc-900 bg-zinc-950/20">
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="skills"
+      className="py-20 px-6 sm:px-8"
+      style={{ borderTop: "1px solid var(--color-border)" }}
+    >
+      <div className="max-w-5xl mx-auto">
         <motion.h2
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-3xl font-bold mb-16 text-center text-zinc-50 font-sans"
+          className="text-2xl font-bold mb-16 text-center"
+          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
         >
           Core Competencies
         </motion.h2>
@@ -23,20 +28,40 @@ const Skills = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-zinc-900/30 border border-zinc-800/50 hover:border-cyan-500/30 hover:shadow-lg hover:shadow-cyan-500/5 transition-all"
+                transition={{ duration: 0.55, delay: index * 0.05 }}
+                className="p-6 rounded-sm transition-all"
+                style={{
+                  background: "var(--color-surface)",
+                  border: "1px solid var(--color-border)",
+                }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
-                    <Icon className="w-5 h-5 text-cyan-400" />
+                  <div 
+                    className="p-2.5 rounded-sm"
+                    style={{
+                      background: "var(--color-accent-dim)",
+                      border: "1px solid var(--color-accent)",
+                    }}
+                  >
+                    <Icon className="w-4 h-4" style={{ color: "var(--color-accent)" }} />
                   </div>
-                  <h4 className="font-bold text-zinc-100 text-lg">{group.title}</h4>
+                  <h4 
+                    className="font-bold text-base"
+                    style={{ color: "var(--color-text)" }}
+                  >
+                    {group.title}
+                  </h4>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {group.skills.map((skill) => (
                     <span 
                       key={skill}
-                      className="px-3 py-1.5 rounded-lg bg-zinc-950 text-zinc-400 border border-zinc-800 font-mono text-xs"
+                      className="px-2.5 py-1 rounded-sm font-mono text-xs"
+                      style={{
+                        background: "var(--color-tag)",
+                        color: "var(--color-text-2)",
+                        border: "1px solid var(--color-border)",
+                      }}
                     >
                       {skill}
                     </span>

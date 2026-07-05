@@ -14,20 +14,31 @@ const recentPosts = posts
 ---
 
 {recentPosts.length > 0 && (
-  <section id="blog-preview" class="py-20 px-4 border-t border-zinc-900 bg-zinc-950/20">
-    <div class="max-w-7xl mx-auto">
+  <section 
+    id="blog-preview" 
+    class="py-20 px-6 sm:px-8"
+    style="border-top: 1px solid var(--color-border);"
+  >
+    <div class="max-w-5xl mx-auto">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
         <div>
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded bg-zinc-900 text-cyan-400 border border-zinc-800 font-mono text-xs font-semibold tracking-wide mb-6 uppercase">
+          <div 
+            class="inline-flex items-center gap-2 px-3 py-1 rounded-sm font-mono text-xs font-semibold tracking-wide mb-6 uppercase border animate-pulse"
+            style="background: var(--color-accent-dim); color: var(--color-accent); border-color: var(--color-accent);"
+          >
             Blog
           </div>
-          <h2 class="text-3xl md:text-4xl font-bold text-zinc-100 font-sans">
+          <h2 
+            class="text-2xl font-bold"
+            style="font-family: var(--font-serif); color: var(--color-text);"
+          >
             Recent Posts
           </h2>
         </div>
         <a 
           href="/blog" 
-          class="group inline-flex items-center gap-2 text-cyan-400 font-semibold hover:text-cyan-300 transition-colors font-sans text-sm"
+          class="group inline-flex items-center gap-2 font-semibold hover:opacity-80 transition-opacity font-sans text-sm"
+          style="color: var(--color-accent);"
         >
           View All Posts <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </a>
