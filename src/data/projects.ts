@@ -2,35 +2,194 @@ import type { Project, ProjectData } from "../types";
 
 const unifiedProjects = [
   {
-    id: "thesis",
-    title: "Skripsi: CPU Pinning & LP Solver on Kubernetes",
+    id: "smart-invoice-reminder",
+    title: "Smart Invoice Reminder AI (SIRA)",
     description:
-      "Riset aktif tentang pengaruh CPU Pinning terhadap performa fase crossover LP solver di lingkungan Kubernetes — mulai dari membangun klaster GCP dari nol hingga mendesain eksperimen.",
+      "A production Accounts Receivable automation platform that scores client payment risk and sends personalized email reminders — deployed at sira.nashtagroup.co.id with a full GitLab CI pipeline across 6 stages.",
+    tags: ["FastAPI", "React", "Celery", "Redis", "Supabase", "PostgreSQL", "Telegram Bot", "Docker", "GitLab CI"],
+    link: "https://sira.nashtagroup.co.id",
+    intro:
+      "In most companies, accounts receivable is still a manual process — someone has to chase down late payers one by one. We built a system that automates this: daily scheduled checks, risk scoring, and personalized reminders that match the tone to the client's payment behavior. The challenge wasn't the algorithm — it was building a system that a finance team without technical background could actually use and trust.",
+    milestones: [
+      {
+        title: "Designing the risk scoring engine",
+        problem:
+          "We needed to prioritize which clients to remind first — not just by days overdue, but by actual payment behavior. A client who is 3 days late for the first time is very different from one who has been 30+ days late five times before.",
+        concept: "Deterministic weighted scoring with Strategy pattern",
+        conceptExplain:
+          "The scorer computes a weighted formula over 5 features: delay severity, overdue count, outstanding balance, payment consistency, and account age — outputting LOW/MEDIUM/HIGH risk. It's implemented as a Strategy plug-in so an ML model can replace the rule-based scorer later without changing the calling code.",
+        outcome:
+          "Shipped a scoring service that categorizes clients consistently and predictably. The finance team can see risk scores in the dashboard and override them. The Strategy pattern proved its value during testing — we swapped in a test scorer without touching any business logic.",
+      },
+      {
+        title: "Personalized reminders at scale",
+        problem:
+          "Generic reminder emails get ignored. We needed to send emails that felt intentional — polite for low-risk clients, firm for medium-risk, and a formal warning for high-risk — while letting the finance team control the actual template text.",
+        concept: "Jinja2 templating + Celery background jobs",
+        conceptExplain:
+          "Templates are authored in Settings UI using Jinja2 syntax. Celery beat runs a daily job that fetches overdue invoices, scores clients, selects the appropriate template, renders it, and dispatches via Resend. This keeps the scheduling logic decoupled from the email content.",
+        outcome:
+          "Finance team can create and edit templates without touching code. Email delivery is reliable and observable — every sent reminder is logged and visible in the Reminders dashboard. Internal Telegram notifications keep the AR team informed in real-time.",
+      },
+      {
+        title: "Building a production-grade CI pipeline",
+        problem:
+          "A team of multiple contributors working on the same codebase without guardrails is a reliability disaster. We needed to ensure code quality before any merge reached production.",
+        concept: "GitLab CI with parallel stages + SonarQube quality gate",
+        conceptExplain:
+          "The pipeline runs 8 parallel jobs per commit: frontend lint + typecheck + build + unit tests, backend lint + typecheck + unit tests + integration tests. SonarQube scans enforce a quality gate before the build stage. Only passing pipelines can trigger a deploy.",
+        outcome:
+          "1,256-line CI configuration across 6 stages: pre, ci, quality, migrate, build, deploy. The quality gate caught several regressions before they reached production. The pipeline also enforces pre-commit hooks (Biome, Ruff, tsc, mypy, Knip) to catch issues even earlier.",
+      },
+    ],
+    techStack: [
+      "FastAPI",
+      "Python",
+      "React",
+      "TypeScript",
+      "Vite",
+      "TanStack Query",
+      "TanStack Router",
+      "Tailwind CSS",
+      "Celery",
+      "Redis",
+      "PostgreSQL",
+      "Supabase",
+      "Resend",
+      "Telegram Bot API",
+      "Docker",
+      "GitLab CI",
+      "SonarQube",
+      "Sentry",
+    ],
+  },
+  {
+    id: "asrama-ui-backend",
+    title: "Asrama UI Backend",
+    description:
+      "A Go REST API for UI's dormitory management system — built during a 6-month internship, handling the full resident lifecycle across 20+ domain entities with Keycloak SSO and Clean Architecture.",
+    tags: ["Go", "Fiber", "MongoDB", "Keycloak", "JWT", "REST API", "Clean Architecture"],
+    github: "https://gitlab.ui.ac.id/dtd/asrama-ui-backend",
+    link: "https://residence.ui.ac.id",
+    intro:
+      "The old system worked — but its database schema had grown organically for years and it showed: redundant fields, inconsistent relations, and queries that fetched far more data than they needed. Armed only with vague technical documentation and an unclear ERD, I had to redesign the entire dormitory backend from scratch. Over 634 commits and 5 months, I threw out the legacy codebase and rebuilt the foundation using Go and Clean Architecture.",
+    milestones: [
+      {
+        title: "Redesigning the database schema",
+        problem:
+          "The existing ERD had significant redundancy — the same data stored in multiple places, causing inconsistencies and inefficient queries. Any migration had to be done without disrupting the running system.",
+        concept: "Database normalization & ERD redesign",
+        conceptExplain:
+          "Normalization eliminates data duplication by separating entities into the right collections and defining clear relations — resulting in more consistent data and more efficient queries. The new schema supports 20+ domain entities: buildings, floors, rooms, residents, occupancies, billing, payments, registrations, and more.",
+        outcome:
+          "Redesigned the most problematic parts of the ERD, separated previously conflated entities, and implemented the new schema in MongoDB. Added a full billing audit trail (log_tagihan) that records every change with old/new values and the actor who made it.",
+      },
+      {
+        title: "Implementing role-based access with Keycloak SSO",
+        problem:
+          "The dormitory system serves multiple roles: admins, residents, and staff — each with different permissions. Managing this without a centralized identity system would mean duplicating auth logic across every endpoint.",
+        concept: "JWT + Keycloak SSO integration",
+        conceptExplain:
+          "Keycloak acts as the identity provider. The API validates incoming JWTs using Keycloak's RSA public key — verifying the token signature without hitting Keycloak on every request. Role claims inside the token determine what each user can do.",
+        outcome:
+          "Implemented JWT validation middleware using the Keycloak public key. Every handler checks role-based permissions before executing business logic. The system supports multiple roles with different access levels across all 20+ domain entities.",
+      },
+      {
+        title: "Applying Clean Architecture at scale",
+        problem:
+          "As the codebase grew to 20+ entities, keeping business logic out of HTTP handlers and database queries became critical for maintainability and testability.",
+        concept: "Clean Architecture (domain → repository → service → handler)",
+        conceptExplain:
+          "Each layer has a single responsibility: domain defines entities, repository handles MongoDB queries, service contains business logic, handler manages HTTP. Dependencies only flow inward — the service doesn't know about HTTP, and the handler doesn't know about MongoDB.",
+        outcome:
+          "Maintained a consistent 4-layer architecture across all 634 commits. Adding a new entity (e.g., room damage tracking) meant writing a domain struct, a MongoDB repository, a service method, and a Fiber handler — each independently testable and replaceable.",
+      },
+    ],
+    techStack: [
+      "Go",
+      "Fiber v3",
+      "MongoDB",
+      "Keycloak",
+      "JWT",
+      "Clean Architecture",
+      "goose",
+      "Makefile",
+      "REST API",
+    ],
+  },
+  {
+    id: "resqlink",
+    title: "ResQLink — Ambulance Dispatch Platform",
+    description:
+      "A real-time ambulance dispatch platform built on a serverless edge architecture — Cloudflare Workers, Upstash Redis, and Uber H3 geospatial indexing for sub-50ms ambulance matching.",
+    tags: ["TypeScript", "Hono", "Cloudflare Workers", "Supabase", "PostgreSQL", "Upstash Redis", "Uber H3", "Mapbox"],
+    github: "https://github.com/101-toyota-team/resqlink-be",
+    intro:
+      "Emergency response is a latency problem. When someone calls an ambulance, every second spent routing the request through a traditional server in a data center is a second wasted. ResQLink was built to remove that overhead entirely — by running the dispatch logic at the network edge, closest to where the request originates.",
+    milestones: [
+      {
+        title: "Geospatial matchmaking with Uber H3",
+        problem:
+          "Finding the nearest available ambulance sounds simple — until you consider that 'nearest' changes every second as ambulances move, and a naive query over a GPS coordinates table does not scale. Traditional lat/long radius queries require full-table scans or expensive spatial indexes.",
+        concept: "H3 hexagonal spatial indexing",
+        conceptExplain:
+          "H3 divides the Earth into hexagonal cells at multiple resolutions. At Resolution 7, each hex covers ~5km². Indexing ambulance positions by their H3 cell turns a spatial search into a hash lookup — O(1) instead of O(n). Progressive ring expansion (gridRingUnsafe up to radius 30) finds the nearest available provider without scanning the full table.",
+        outcome:
+          "Implemented H3-based ambulance matching in Upstash Redis. Static assets (hospitals) are queried from Supabase with gridDisk(1) neighbor expansion. The combined approach achieves sub-50ms dispatch latency — the target for emergency response systems.",
+      },
+      {
+        title: "Real-time GPS tracking at the edge",
+        problem:
+          "High-frequency GPS updates from ambulances (every 1–2 seconds) cannot be written to a database on every tick — the write amplification would make the database the bottleneck and add significant latency to every update.",
+        concept: "Supabase Broadcast Channels + serverless edge runtime",
+        conceptExplain:
+          "Supabase Broadcast Channels deliver real-time messages directly between clients over WebSocket, bypassing the database entirely. Cloudflare Workers run the routing logic at edge nodes distributed globally — requests are handled within milliseconds of the user's location, not at a central server.",
+        outcome:
+          "GPS updates flow through Broadcast Channels to connected clients with no database writes. Persistent state (presence, active dispatch status) lives in Upstash Redis. The architecture eliminates the traditional tradeoff between real-time performance and data durability.",
+      },
+    ],
+    techStack: [
+      "TypeScript",
+      "Hono",
+      "Cloudflare Workers",
+      "Supabase",
+      "PostgreSQL",
+      "Upstash Redis",
+      "Uber H3",
+      "Mapbox API",
+      "GitHub Actions",
+    ],
+  },
+  {
+    id: "thesis",
+    title: "Thesis: CPU Pinning & LP Solver on Kubernetes",
+    description:
+      "Active research on the effect of CPU Pinning on LP solver crossover phase performance in a Kubernetes environment — from building a GCP cluster from scratch to designing controlled experiments.",
     tags: ["Kubernetes", "GCP", "Linux Scheduler", "Gurobi", "kubeadm"],
     github: "https://github.com/adipppp/crossover-experiment",
     status: "in-progress" as const,
     intro:
-      "Fase crossover adalah bagian dari LP solver yang jarang dibicarakan — titik di mana metode barrier menyerahkan solusi ke simplex untuk menemukan basic feasible solution, dan fase ini notorius sulit diparalelkan. Saya ingin tahu apakah OS scheduler sendiri merupakan variabel tersembunyi yang memengaruhi performanya.",
+      "The crossover phase is a part of LP solvers that is rarely talked about — the point where the barrier method hands over the solution to the simplex method to find a basic feasible solution, and this phase is notoriously hard to parallelize. I wanted to find out if the OS scheduler itself is a hidden variable affecting its performance.",
     milestones: [
       {
-        title: "Membangun environment yang terkontrol",
+        title: "Building a controlled environment",
         problem:
-          "Kamu tidak bisa mengukur pengaruh CPU Pinning tanpa lingkungan yang terkontrol. VM cloud dengan konfigurasi default menggunakan CFS scheduler dan shared resource yang menimbulkan noise — artinya hasil eksperimen bisa saja mencerminkan interferensi scheduler, bukan performa solver itu sendiri.",
+          "You cannot measure the impact of CPU Pinning without a controlled environment. Cloud VMs with default configurations use the CFS scheduler and shared resources, which introduce noise — meaning experimental results could reflect scheduler interference rather than the solver's performance itself.",
         concept: "Kubernetes CPU Manager (static policy)",
         conceptExplain:
-          "Ketika diaktifkan, CPU Manager mem-pin CPU container secara eksklusif ke core fisik menggunakan Linux cgroups — menghilangkan preemption dan CPU migration oleh scheduler untuk workload tersebut.",
+          "When enabled, the CPU Manager pins container CPUs exclusively to physical cores using Linux cgroups — eliminating preemption and CPU migration by the scheduler for that workload.",
         outcome:
-          "Membangun klaster Kubernetes multi-node di GCP menggunakan kubeadm. Menulis dua konfigurasi kubelet — satu baseline (CFS) dan satu dengan static CPU Manager — beserta skrip untuk drain, ganti konfigurasi, dan uncordon node antar kondisi eksperimen.",
+          "Built a multi-node Kubernetes cluster on GCP using kubeadm. Wrote two kubelet configurations — one baseline (CFS) and one with static CPU Manager — along with scripts to drain, switch configs, and uncordon nodes between experimental conditions.",
       },
       {
-        title: "Mengukur yang benar-benar penting",
+        title: "Measuring what really matters",
         problem:
-          "Wall-clock time saja tidak cukup untuk menjelaskan mengapa sesuatu lebih lambat. Kamu butuh tahu apakah CPU di-interrupt atau di-migrate di tengah komputasi — karena itulah yang akan membuktikan atau membantah hipotesis.",
+          "Wall-clock time alone is not enough to explain why something is slower. You need to know if the CPU is being interrupted or migrated in the middle of computation — because that is what will prove or disprove the hypothesis.",
         concept: "Context switches & CPU throttling",
         conceptExplain:
-          "Metrik OS yang menunjukkan kapan scheduler menarik resource dari sebuah proses. Jumlah context switch yang tinggi selama fase crossover mengindikasikan bahwa scheduler-lah yang menjadi bottleneck.",
+          "OS metrics that show when the scheduler pulls resources from a process. A high number of context switches during the crossover phase indicates that the scheduler itself is the bottleneck.",
         outcome:
-          "Membangun host-side metrics collector (collect_system_metrics.py) yang berjalan bersamaan dengan solver pod, mengambil sampel context switch dan throttle event sepanjang fase crossover. Setiap eksperimen kini menghasilkan dua dataset: timing solver dan perilaku OS.",
+          "Built a host-side metrics collector (collect_system_metrics.py) that runs alongside the solver pod, sampling context switches and throttle events throughout the crossover phase. Each experiment now produces two datasets: solver timing and OS behavior.",
       },
     ],
     techStack: [
@@ -44,201 +203,99 @@ const unifiedProjects = [
     ],
   },
   {
-    id: "marmut",
-    title: "Marmut — Discord Music Bot",
-    description:
-      "Bot musik Discord yang berkembang dari ide sederhana menjadi distributed system — dengan setiap versinya memaksa pemahaman baru tentang cara komputer bekerja.",
-    tags: ["Node.js", "TypeScript", "Prisma", "PostgreSQL", "Lavalink", "discord.js"],
-    github: "https://github.com/adipppp/marmut",
-    intro:
-      "TODO: Tulis 2–3 kalimat tentang mengapa kamu memulai Marmut. Bot lain tidak bisa diandalkan? Kamu ingin membuat sendiri? Awalnya terlihat mudah?",
-    milestones: [
-      {
-        title: "TODO: Judul untuk milestone Streams",
-        problem:
-          "TODO: Apa yang rusak atau tidak bekerja dengan baik pada versi pertama? Jelaskan masalahnya secara konkret (misalnya: crash saat file besar, memori habis, dsb.).",
-        concept: "Node.js Streams & backpressure",
-        conceptExplain:
-          "Data mengalir dalam potongan kecil; producer yang cepat (download) tidak membanjiri consumer yang lebih lambat (playback), sehingga penggunaan memori tetap konstan terlepas dari ukuran file.",
-        outcome:
-          "TODO: Apa yang kamu lakukan untuk mengatasinya? Apa hasilnya setelah menggunakan streams?",
-      },
-      {
-        title: "TODO: Judul untuk milestone OS processes",
-        problem:
-          "TODO: Apa yang rusak atau tidak responsif terkait pemrosesan audio? Jelaskan secara konkret.",
-        concept: "OS-level process management",
-        conceptExplain:
-          "Perbedaan antara thread dan process, exit code, sinyal (SIGTERM/SIGKILL), dan resource limit saat melakukan spawn child process dari Node — semua hal yang tidak dipaksa oleh aplikasi JS murni.",
-        outcome:
-          "TODO: Apa yang kamu lakukan? Bagaimana perilaku bot berubah setelahnya?",
-      },
-      {
-        title: "TODO: Judul untuk milestone WebSocket Gateway",
-        problem:
-          "TODO: Bagaimana koneksi bot bisa putus atau terasa tidak responsif? Apa yang mendorong kamu untuk turun ke level gateway?",
-        concept: "Discord WebSocket Gateway protocol",
-        conceptExplain:
-          "Koneksi persisten yang dijaga hidup oleh Discord menggunakan heartbeat; ketika putus, kamu butuh resume logic (sequence number + session ID) agar tidak kehilangan event.",
-        outcome:
-          "TODO: Apa yang kamu implementasikan di level gateway? Bagaimana reliabilitas bot berubah?",
-      },
-    ],
-    techStack: [
-      "Node.js",
-      "TypeScript",
-      "discord.js",
-      "Prisma",
-      "PostgreSQL",
-      "Lavalink",
-    ],
-  },
-  {
-    id: "sso-system",
-    title: "OIDC Identity System",
-    description:
-      "Implementasi SSO berbasis OIDC yang di-deploy lintas subnet VPC yang terisolasi di GCP — dibangun untuk memahami apa arti 'network security' sesungguhnya di level infrastruktur.",
-    tags: ["OIDC", "GCP", "VPC", "Cloud Firewall", "Spring Boot"],
-    github: "https://github.com/adipppp/ssoserver",
-    extraLinks: [
-      { name: "Client Implementation", url: "https://github.com/adipppp/ssoclient" },
-      { name: "Resource Server", url: "https://github.com/adipppp/resourceserver" },
-    ],
-    intro:
-      "Saya ingin tahu apa yang terjadi ketika kamu benar-benar menegakkan segmentasi jaringan — bukan hanya mengonfigurasinya, tapi mencoba membobolnya. Jawabannya: jauh lebih sulit dari yang terlihat di paper.",
-    milestones: [
-      {
-        title: "Desain topologi jaringan",
-        problem:
-          "Jaringan flat berarti setiap service yang terkompromi bisa menjangkau service lain. Menempatkan komponen di subnet terpisah hanya bekerja jika routing dan firewall rule sudah benar — dan itu lebih sulit daripada yang tampak, karena satu rule yang salah bisa memblokir handshake OIDC sepenuhnya.",
-        concept: "VPC subnetting & firewall rules",
-        conceptExplain:
-          "Aturan ingress/egress di level subnet mengontrol tepat service mana yang bisa berbicara ke service mana, dan dari arah mana — ini adalah unit fundamental dari network isolation.",
-        outcome:
-          "Mendesain topologi 3-subnet di GCP: Authorization Server, Resource Server, dan Client masing-masing di subnet sendiri, dengan allow rule eksplisit hanya di mana diperlukan. Memverifikasi bahwa traffic yang tidak diizinkan benar-benar ditolak.",
-      },
-      {
-        title: "Menjalankan OIDC handshake lintas subnet",
-        problem:
-          "OIDC authorization code flow melibatkan beberapa redirect lintas ketiga komponen. Membuat token mengalir dengan benar ketika setiap komponen hanya bisa melihat tetangganya yang diizinkan membutuhkan pemahaman mendalam tentang protokolnya — tidak cukup hanya menyambungkan library.",
-        concept: "OpenID Connect (OIDC) authorization code flow",
-        conceptExplain:
-          "Alur multi-langkah di mana klien mendapatkan authorization code, menukarnya dengan token di Authorization Server, lalu memvalidasi ID token — setiap langkah membutuhkan jalur jaringan spesifik yang harus terbuka.",
-        outcome:
-          "Mengimplementasikan Authorization Server dengan Spring Authorization Server, memverifikasi full OIDC handshake bekerja dengan hanya firewall rule minimum yang diperlukan antar subnet.",
-      },
-    ],
-    techStack: [
-      "Java",
-      "Spring Boot",
-      "Spring Authorization Server",
-      "OIDC",
-      "GCP",
-      "VPC Network",
-      "Cloud Firewall",
-      "PostgreSQL",
-    ],
-  },
-  {
     id: "matrix-multiplication",
-    title: "Matrix Multiplication — CPU vs GPU",
+    title: "Parallel Matrix Multiplication",
     description:
-      "Studi perbandingan lima implementasi algoritma yang sama — dari satu loop CPU hingga cuBLAS yang diakselerasi GPU — untuk memahami apa yang membuat masing-masing lebih cepat, dan mengapa beberapa di antaranya mengejutkan.",
-    tags: ["CUDA", "C", "MPI", "cuBLAS", "Kubernetes", "Parallel Computing"],
-    github: "https://github.com/adipppp/pr2-gpu",
+      "High-performance computing implementation of matrix multiplication exploring the architectural differences between CPU and GPU parallelization — using MPI, CUDA, OpenMP, and cuBLAS.",
+    tags: ["CUDA", "C++", "MPI", "cuBLAS", "Kubernetes", "Parallel Computing"],
+    github: "https://github.com/101-toyota-team/resqlink-be",
     intro:
-      "Tugasnya adalah mengimplementasikan perkalian matriks dengan lima cara berbeda. Bagian yang menarik bukan menulis kodenya — tapi memahami mengapa versi GPU tidak semuanya sama cepatnya, dan mengapa versi CUDA naive bisa lebih lambat dari MPI pada input tertentu.",
+      "Moving from a distributed CPU architecture to a GPU architecture isn't just about changing libraries; it requires a fundamental shift in how you distribute the data to avoid bottlenecking the hardware.",
     milestones: [
       {
-        title: "Dari satu core ke banyak core (MPI)",
+        title: "From Row-wise to Dot Product",
         problem:
-          "Implementasi sekuensial sudah benar tapi lambat — runtime-nya tumbuh O(N³). Pertanyaannya: berapa banyak speedup yang bisa didapat hanya dengan membagi pekerjaan ke beberapa CPU, dan apa biaya komunikasi yang harus dibayar?",
-        concept: "Distributed memory parallelism (MPI)",
+          "In the previous CPU implementation, we used row-wise distribution via MPI Scatter/Gather. However, transferring this logic directly to the GPU resulted in massive thread idling. CPU cores are few but fast; GPU cores are thousands but simpler.",
+        concept: "Distributed memory vs. Massive GPU threading",
         conceptExplain:
-          "Setiap process memiliki slice data sendiri; MPI Scatter/Gather menangani pembagian dan pengumpulan data, tapi komunikasi itu sendiri punya biaya yang nyata — dan biaya itulah yang membatasi speedup.",
+          "GPUs have thousands of tiny cores that operate efficiently when threads are grouped in warps. Doing row-wise splitting on the GPU leaves massive numbers of cores idle, especially for smaller matrix dimensions.",
         outcome:
-          "Mengimplementasikan MPI dengan distribusi baris via Scatter/Gather dan broadcast matriks B. Mengukur bahwa speedup tidak linear: communication overhead mulai mendominasi setelah jumlah rank tertentu.",
+          "Pivoted to a dot-product thread mapping approach to maximize parallelization across thousands of CUDA cores. This ensures that every element calculation maps directly to active threads, achieving real GPU hardware utilization.",
       },
       {
-        title: "Dari CPU cluster ke GPU — dan jebakan coalescing",
+        title: "Overcoming Cache Thrashing with Shared Memory Tiling",
         problem:
-          "Versi CUDA pertama (uncoalesced) ternyata lebih lambat dari yang diharapkan. Penyebabnya bukan logika komputasinya — melainkan cara thread mengakses memori.",
-        concept: "GPU memory coalescing",
+          "Even with coalesced global memory access, the GPU's memory bandwidth quickly becomes the bottleneck because every thread reads the same matrix elements from global memory repeatedly. When the matrices grow, cache thrashing degrades performance.",
+        concept: "GPU Shared Memory Tiling",
         conceptExplain:
-          "Thread dalam satu warp yang mengakses alamat memori berurutan mendapat satu transaksi; thread yang mengakses alamat acak mendapat penalti. Tiga mode CUDA (coalesced, row-wise, uncoalesced) mendemonstrasikan ini secara langsung dan terukur.",
+          "Shared memory acts as a high-speed local scratchpad per thread block. Tiling partitions the matrices into sub-blocks (tiles), loads them into shared memory once, and reuses them across the block, reducing global memory accesses.",
         outcome:
-          "Mengimplementasikan ketiga mode CUDA dan mengukur perbedaan performanya. Mode coalesced secara konsisten lebih cepat — perbedaannya cukup signifikan untuk membuktikan bahwa memory access pattern, bukan jumlah komputasi, yang mendominasi runtime GPU.",
-      },
-      {
-        title: "Shared memory tiling — mengurangi global memory traffic",
-        problem:
-          "Meskipun mode coalesced sudah lebih baik, setiap thread masih membaca elemen yang sama dari global memory berulang kali — bandwidth global memory menjadi bottleneck.",
-        concept: "GPU shared memory & tiling",
-        conceptExplain:
-          "Shared memory adalah scratchpad cepat per thread block. Tiling memuat sub-matriks ke shared memory satu kali, lalu menggunakannya berkali-kali — mengurangi global memory access sebesar faktor blockSize.",
-        outcome:
-          "Mengimplementasikan kernel tiled dengan __shared__ memory. Mengukur peningkatan performa yang signifikan dibanding versi coalesced biasa, khususnya untuk ukuran matriks besar di mana bandwidth global memory menjadi bottleneck dominan.",
-      },
-      {
-        title: "cuBLAS — batas dari optimasi manual",
-        problem:
-          "Kernel tiled sudah jauh lebih baik, tapi masih kalah dari cuBLAS. Mengapa sebuah library bisa mengalahkan implementasi manual yang sudah dioptimasi?",
-        concept: "Library-level GPU optimization (cuBLAS)",
-        conceptExplain:
-          "cuBLAS menggunakan fused operation, kernel yang di-tune khusus per arsitektur GPU, dan Tensor Cores — optimasi yang tidak bisa direplikasi dengan tangan tanpa akses ke detail hardware internal.",
-        outcome:
-          "Mengukur bahwa cuBLAS mengalahkan semua implementasi manual secara konsisten. Memahami bahwa jarak antara 'kernel yang baik' dengan 'kernel yang optimal' diisi oleh pengetahuan arsitektur yang sangat spesifik — dan library seperti cuBLAS mewakili akumulasi pengetahuan itu.",
+          "Implemented matrix_mul_cuda_shared. Discovered empirically that shared memory tiling only yields speedups on massive matrix inputs. On smaller matrices, the overhead of setup causes cache thrashing and minor performance penalties, highlighting that memory bandwidth is often a harder bottleneck than raw compute.",
       },
     ],
     techStack: [
-      "C",
+      "C++",
       "CUDA",
       "cuBLAS",
       "MPI",
       "OpenMP",
       "Kubernetes",
       "Docker",
-      "NVHPC",
     ],
   },
   {
-    id: "asrama-ui",
-    title: "Asrama UI API",
+    id: "marmut",
+    title: "Marmut — Distributed Audio Streaming Service",
     description:
-      "Backend untuk sistem manajemen asrama baru Universitas Indonesia — dibangun selama magang 6 bulan, dengan fokus pada membersihkan desain database yang telah menumpuk technical debt bertahun-tahun.",
-    tags: ["Go", "Fiber", "MongoDB", "REST API"],
-    github: "https://gitlab.ui.ac.id/dtd/asrama-ui-backend",
-    link: "https://residence.ui.ac.id",
+      "A Discord audio streaming service built across three generations and four years — starting as a Python experiment, rewritten in TypeScript, and eventually migrated to a distributed audio architecture with Lavalink and Docker.",
+    tags: ["Node.js", "TypeScript", "Python", "Lavalink", "PostgreSQL", "Prisma", "discord.js", "Docker"],
+    github: "https://github.com/adipppp/marmut",
     intro:
-      "Sistem yang lama berfungsi, tapi schema database-nya tumbuh secara organik selama bertahun-tahun dan itu terlihat jelas — field yang redundan, relasi yang tidak konsisten, query yang mengambil jauh lebih banyak data dari yang dibutuhkan. Tugasnya adalah memperbaiki fondasi itu sebelum membangun di atasnya.",
+      "It started as a simple idea: build a bot that plays music in Discord. Existing YouTube-based music bots were either dead or heavily paywalled. I decided to build my own. What I didn't expect was that it would take three full rewrites over four years and teach me more about systems programming than any course did. The first version was 128 commits of Python held together by trial and error. The second was a TypeScript rewrite that forced me to think seriously about architecture. The third — Marmut — introduced me to distributed systems, Docker, and what 'production-ready' actually means.",
     milestones: [
       {
-        title: "Mendesain ulang schema database",
+        title: "Generation 1: Learning by breaking things (Python)",
         problem:
-          "ERD lama memiliki redundansi yang tinggi: data yang sama disimpan di beberapa tempat, menyebabkan inkonsistensi dan query yang tidak efisien. Migrasi harus dilakukan tanpa mengganggu sistem yang sedang berjalan.",
-        concept: "Database normalization & ERD redesign",
+          "The first version worked — sometimes. Audio would cut out, the bot would crash on large queues, and race conditions between join() and play() caused unpredictable behavior. The code was a single file that grew until it collapsed under its own weight.",
+        concept: "Async I/O and process management in Python",
         conceptExplain:
-          "Normalisasi menghilangkan data duplikat dengan memisahkan entitas ke tabel/koleksi yang tepat dan mendefinisikan relasi yang jelas — menghasilkan data yang lebih konsisten dan query yang lebih efisien.",
+          "discord.py uses asyncio under the hood — which means a blocking call anywhere can freeze the entire bot. Audio streaming with yt-dlp and ffmpeg requires spawning child processes correctly, handling their stdout as streams, and cleaning them up on exit. Getting this wrong causes memory leaks and zombie processes.",
         outcome:
-          "Mendesain ulang bagian ERD yang paling bermasalah, memisahkan entitas yang sebelumnya digabungkan, dan mengimplementasikan schema baru di MongoDB. Query yang sebelumnya mengambil dokumen berlebih kini hanya mengambil yang diperlukan.",
+          "128 commits of increasingly structured Python. Implemented multi-server audio state (one player per guild), a search menu with Discord button interactions, and a working song/queue repeat system. More importantly, identified the exact failure modes that would drive the next rewrite.",
       },
       {
-        title: "Membangun REST API layer",
+        title: "Generation 2: Rewriting for structure (TypeScript)",
         problem:
-          "Dengan schema yang sudah diperbaiki, API perlu dibangun di atasnya — dengan autentikasi yang aman dan endpoint yang konsisten untuk digunakan oleh tim frontend.",
-        concept: "JWT-based authentication & REST API design",
+          "Python's dynamic typing made it hard to reason about state across multiple guilds. Every time I added a feature, I introduced a bug somewhere else. The codebase needed a real architecture — not just better code.",
+        concept: "Manager pattern and semantic versioning",
         conceptExplain:
-          "JWT memungkinkan server memverifikasi identitas pengguna tanpa menyimpan state sesi — token yang di-sign berisi klaim yang bisa diverifikasi di setiap request.",
+          "Separating concerns into CommandManager, PlayerManager, and event Listeners meant each component had a single responsibility. Semantic versioning (v0.4 → v0.14) forced a discipline of shipping complete, tested increments rather than 'save checkpoint' commits.",
         outcome:
-          "Mengimplementasikan RESTful API menggunakan Go (Fiber) dengan JWT authentication, melayani endpoint untuk pendaftaran dan pengelolaan asrama. Berkolaborasi dengan tim frontend untuk memastikan kontrak API yang jelas.",
+          "67 commits from v0.4 to v0.14 across 10 months. Implemented slash commands (following Discord's API migration), MongoDB-backed guild state, a cooldown system, and command blocking to prevent abuse. The jump from 'save' commit messages to structured versioning reflected a real shift in how I thought about software.",
+      },
+      {
+        title: "Generation 3: Migrating to Lavalink (distributed audio)",
+        problem:
+          "Running ffmpeg inside the bot process meant audio quality was tied to bot memory and CPU. On servers with high activity, the bot became a bottleneck. The fundamental issue was that audio processing and bot logic were coupled in the same process.",
+        concept: "Client-server audio architecture with Lavalink",
+        conceptExplain:
+          "Lavalink is a standalone audio server that streams audio to Discord directly. The bot becomes a thin client — it sends play/pause/stop commands to Lavalink over a WebSocket connection, and Lavalink handles all audio decoding and buffering independently.",
+        outcome:
+          "Migrated from ffmpeg to Lavalink, then from Lavalink to NodeLink (a self-hostable alternative). Added support for YouTube Music and Shorts. Containerized the entire stack using Docker with multi-stage builds, a separate PostgreSQL service, and authenticated health checks — 168 commits over two years.",
       },
     ],
     techStack: [
-      "Go",
-      "Fiber",
-      "MongoDB",
-      "JWT",
-      "REST API",
+      "TypeScript",
+      "Python",
+      "discord.js",
+      "discord.py",
+      "Lavalink",
+      "NodeLink",
+      "PostgreSQL",
+      "Prisma",
+      "Docker",
+      "yt-dlp",
+      "ffmpeg",
     ],
   },
 ];
@@ -263,7 +320,6 @@ export const projectsData: Record<string, ProjectData> = unifiedProjects.reduce(
       techStack: p.techStack,
       github: p.github,
       demo: p.link,
-      extraLinks: p.extraLinks,
       status: p.status,
     };
     return acc;

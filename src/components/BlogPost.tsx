@@ -10,7 +10,7 @@ interface Props {
 }
 
 const BlogPost = ({ title, pubDate, tags, children }: Props) => {
-  const formattedDate = new Intl.DateTimeFormat("id-ID", {
+  const formattedDate = new Intl.DateTimeFormat("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -24,26 +24,26 @@ const BlogPost = ({ title, pubDate, tags, children }: Props) => {
     >
       <a
         href="/blog"
-        className="inline-flex items-center gap-2 text-blue-500 hover:text-blue-400 mb-10 transition-colors"
+        className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-10 transition-colors font-mono text-sm font-semibold"
       >
-        <ArrowLeft className="w-4 h-4" /> Kembali ke Blog
+        <ArrowLeft className="w-4 h-4" /> Back to Blog
       </a>
 
-      <header className="mb-12">
-        <div className="flex items-center gap-2 text-slate-400 text-sm mb-4">
-          <CalendarDays className="w-4 h-4" />
+      <header className="mb-12 border-b border-zinc-900 pb-8">
+        <div className="flex items-center gap-2 text-zinc-500 text-sm mb-4 font-mono">
+          <CalendarDays className="w-4 h-4 text-zinc-600" />
           <time dateTime={pubDate.toISOString()}>{formattedDate}</time>
         </div>
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-slate-100">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-100 font-sans">
           {title}
         </h1>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5">
           {tags.map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700 text-xs"
+              className="px-2 py-0.5 rounded bg-zinc-900 text-zinc-450 border border-zinc-800 font-mono text-xs"
             >
               #{tag}
             </span>
@@ -52,10 +52,10 @@ const BlogPost = ({ title, pubDate, tags, children }: Props) => {
       </header>
 
       {/* Prose Container */}
-      <div className="prose prose-invert max-w-none prose-lg 
-        [&_a]:text-blue-500 hover:[&_a]:text-blue-400
-        [&_pre]:border [&_pre]:border-slate-800
-        [&_blockquote]:border-blue-500 [&_blockquote]:bg-blue-900/10 [&_blockquote]:not-italic [&_blockquote]:py-1 [&_blockquote]:rounded-r-lg
+      <div className="prose prose-invert max-w-none prose-zinc 
+        [&_a]:text-cyan-400 hover:[&_a]:text-cyan-300
+        [&_pre]:border [&_pre]:border-zinc-800/80 [&_pre]:bg-zinc-950/50
+        [&_blockquote]:border-cyan-500 [&_blockquote]:bg-cyan-950/10 [&_blockquote]:not-italic [&_blockquote]:py-1 [&_blockquote]:rounded-r-lg
       ">
         {children}
       </div>

@@ -1,21 +1,22 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+@theme {
+  --font-sans: "Inter", "Geist", system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+}
+
 :root {
   color-scheme: dark;
-  font-family:
-    "Inter",
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: var(--font-sans);
 }
 
 body {
-  @apply bg-[#0f172a] text-slate-200 antialiased selection:bg-blue-500/30;
+  @apply bg-[#09090b] text-zinc-300 antialiased selection:bg-cyan-500/30;
   margin: 0;
   background-image:
-    radial-gradient(at 0% 0%, rgba(30, 64, 175, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(34, 211, 238, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(249, 115, 22, 0.03) 0px, transparent 50%);
   background-attachment: fixed;
 }
 
@@ -29,15 +30,15 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #09090b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #18181b;
   border-radius: 5px;
-  border: 2px solid #0f172a;
+  border: 2px solid #09090b;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #27272a;
 }

@@ -3,8 +3,8 @@ import type { CoreExpertise, SkillGroup } from "../types";
 
 export const coreExpertise: CoreExpertise[] = [
   { name: "Go", rating: 4 },
-  { name: "Java", rating: 4 },
-  { name: "Google Cloud", rating: 4 },
+  { name: "Python", rating: 4 },
+  { name: "TypeScript", rating: 4 },
   { name: "SQL", rating: 4 },
   { name: "MongoDB", rating: 4 },
   { name: "Docker", rating: 4 },
@@ -13,27 +13,27 @@ export const coreExpertise: CoreExpertise[] = [
 export const skillGroups: SkillGroup[] = [
   {
     icon: Server,
-    title: "Frameworks",
-    skills: ["Go", "Fiber", "Java", "Spring Boot", "Node.js"],
+    title: "Backend",
+    skills: ["Go", "Fiber", "FastAPI", "Java", "Spring Boot", "Node.js", "C++"],
   },
   {
     icon: Database,
     title: "Databases",
-    skills: ["PostgreSQL", "MongoDB", "SQL", "Prisma"],
+    skills: ["PostgreSQL", "MongoDB", "Redis (Upstash)", "Supabase", "Prisma"],
   },
   {
     icon: Cloud,
-    title: "DevOps & Tools",
-    skills: ["Docker", "Kubernetes", "GCP", "CI/CD", "Git"],
+    title: "DevOps & Infra",
+    skills: ["Docker", "Kubernetes", "GCP", "Cloudflare Workers", "GitLab CI", "Celery"],
   },
   {
     icon: Cpu,
-    title: "Architecture",
-    skills: ["System Design", "Microservices", "Node.js Streams"],
+    title: "Frontend",
+    skills: ["React", "TypeScript", "Vite", "TanStack Query", "Tailwind CSS"],
   },
   {
     icon: Shield,
-    title: "Security & Networking",
-    skills: ["OIDC", "VPC Network", "Cloud Firewall", "Subnetting"],
+    title: "Security & Systems",
+    skills: ["Keycloak SSO", "JWT", "OIDC", "CUDA", "MPI", "OpenMP"],
   },
 ];
