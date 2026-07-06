@@ -8,13 +8,15 @@ const unifiedProjects = [
       "A production Accounts Receivable automation platform that scores client payment risk and sends personalized email reminders — deployed at sira.nashtagroup.co.id with a full GitLab CI pipeline across 6 stages.",
     tags: ["FastAPI", "React", "Celery", "Redis", "Supabase", "PostgreSQL", "Telegram Bot", "Docker", "GitLab CI"],
     link: "https://sira.nashtagroup.co.id",
+    // ─── REVISED INTRO ────────────────────────────────────────────────────────
     intro:
-      "In most companies, accounts receivable is still a manual process — someone has to chase down late payers one by one. We built a system that automates this: daily scheduled checks, risk scoring, and personalized reminders that match the tone to the client's payment behavior. The challenge wasn't the algorithm — it was building a system that a finance team without technical background could actually use and trust.",
+      "Accounts receivable sounds simple until you work at a company that does it manually. Someone opens a spreadsheet every morning, finds the overdue invoices, writes a personalized email, sends it, updates the tracker, repeats. For a small portfolio it's manageable. At scale, it's a full-time job — and it still gets things wrong: too soft a tone for a chronic late-payer, a missed follow-up for a first-timer, a client who should have been escalated two weeks ago. We built SIRA to make those decisions automatic, observable, and auditable — so the finance team could see what happened and why, not just receive an email saying a reminder was sent.",
     milestones: [
       {
         title: "Designing the risk scoring engine",
+        // ─── REVISED PROBLEM ────────────────────────────────────────────
         problem:
-          "We needed to prioritize which clients to remind first — not just by days overdue, but by actual payment behavior. A client who is 3 days late for the first time is very different from one who has been 30+ days late five times before.",
+          "The naive approach — remind everyone who is overdue — produces exactly the outcome you're trying to avoid: the first-time 3-day-late client gets a firm warning, the chronic 30-day offender gets a polite nudge. Getting the tone wrong doesn't just feel bad; it damages relationships and undermines the point of sending a reminder at all. We needed a way to rank clients by actual payment behavior, not just days past due.",
         concept: "Deterministic weighted scoring with Strategy pattern",
         conceptExplain:
           "The scorer computes a weighted formula over 5 features: delay severity, overdue count, outstanding balance, payment consistency, and account age — outputting LOW/MEDIUM/HIGH risk. It's implemented as a Strategy plug-in so an ML model can replace the rule-based scorer later without changing the calling code.",
@@ -24,7 +26,7 @@ const unifiedProjects = [
       {
         title: "Personalized reminders at scale",
         problem:
-          "Generic reminder emails get ignored. We needed to send emails that felt intentional — polite for low-risk clients, firm for medium-risk, and a formal warning for high-risk — while letting the finance team control the actual template text.",
+          "Generic reminder emails get ignored. We needed to send emails that felt intentional — polite for low-risk clients, firm for medium-risk, and a formal warning for high-risk — while letting the finance team control the actual template text without touching code.",
         concept: "Jinja2 templating + Celery background jobs",
         conceptExplain:
           "Templates are authored in Settings UI using Jinja2 syntax. Celery beat runs a daily job that fetches overdue invoices, scores clients, selects the appropriate template, renders it, and dispatches via Resend. This keeps the scheduling logic decoupled from the email content.",
@@ -43,24 +45,10 @@ const unifiedProjects = [
       },
     ],
     techStack: [
-      "FastAPI",
-      "Python",
-      "React",
-      "TypeScript",
-      "Vite",
-      "TanStack Query",
-      "TanStack Router",
-      "Tailwind CSS",
-      "Celery",
-      "Redis",
-      "PostgreSQL",
-      "Supabase",
-      "Resend",
-      "Telegram Bot API",
-      "Docker",
-      "GitLab CI",
-      "SonarQube",
-      "Sentry",
+      "FastAPI", "Python", "React", "TypeScript", "Vite", "TanStack Query",
+      "TanStack Router", "Tailwind CSS", "Celery", "Redis", "PostgreSQL",
+      "Supabase", "Resend", "Telegram Bot API", "Docker", "GitLab CI",
+      "SonarQube", "Sentry",
     ],
   },
   {
@@ -106,15 +94,8 @@ const unifiedProjects = [
       },
     ],
     techStack: [
-      "Go",
-      "Fiber v3",
-      "MongoDB",
-      "Keycloak",
-      "JWT",
-      "Clean Architecture",
-      "goose",
-      "Makefile",
-      "REST API",
+      "Go", "Fiber v3", "MongoDB", "Keycloak", "JWT", "Clean Architecture",
+      "goose", "Makefile", "REST API",
     ],
   },
   {
@@ -149,15 +130,8 @@ const unifiedProjects = [
       },
     ],
     techStack: [
-      "TypeScript",
-      "Hono",
-      "Cloudflare Workers",
-      "Supabase",
-      "PostgreSQL",
-      "Upstash Redis",
-      "Uber H3",
-      "Mapbox API",
-      "GitHub Actions",
+      "TypeScript", "Hono", "Cloudflare Workers", "Supabase", "PostgreSQL",
+      "Upstash Redis", "Uber H3", "Mapbox API", "GitHub Actions",
     ],
   },
   {
@@ -168,8 +142,9 @@ const unifiedProjects = [
     tags: ["Kubernetes", "GCP", "Linux Scheduler", "Gurobi", "kubeadm"],
     github: "https://github.com/adipppp/crossover-experiment",
     status: "in-progress" as const,
+    // ─── REVISED INTRO ────────────────────────────────────────────────────────
     intro:
-      "The crossover phase is a part of LP solvers that is rarely talked about — the point where the barrier method hands over the solution to the simplex method to find a basic feasible solution, and this phase is notoriously hard to parallelize. I wanted to find out if the OS scheduler itself is a hidden variable affecting its performance.",
+      "LP solvers are supposed to be deterministic — run the same problem twice, get the same answer in the same time. Except that's not always what happens in practice. The crossover phase — where the barrier method hands off to simplex to find a basic feasible solution — is notoriously hard to parallelize, and its runtime can vary more than you'd expect on what looks like identical hardware. My hypothesis: the OS scheduler is a hidden variable. Containerized workloads share CPU time with everything else running on the node, and those preemptions show up as noise in your solver timing. This thesis is my attempt to prove or disprove that with a controlled Kubernetes experiment.",
     milestones: [
       {
         title: "Building a controlled environment",
@@ -183,23 +158,18 @@ const unifiedProjects = [
       },
       {
         title: "Measuring what really matters",
+        // ─── REVISED PROBLEM ────────────────────────────────────────────
         problem:
-          "Wall-clock time alone is not enough to explain why something is slower. You need to know if the CPU is being interrupted or migrated in the middle of computation — because that is what will prove or disprove the hypothesis.",
-        concept: "Context switches & CPU throttling",
+          "Wall-clock time alone isn't enough to prove the hypothesis. If the pinned condition is faster, it could be because of CPU pinning — or it could be a quieter machine, a warmer cache, or a different Gurobi internal state. You need to show that the scheduler was actually interfering in the baseline condition, not just that it was slower.",
+        concept: "Context switches & CPU throttling as evidence",
         conceptExplain:
-          "OS metrics that show when the scheduler pulls resources from a process. A high number of context switches during the crossover phase indicates that the scheduler itself is the bottleneck.",
+          "OS metrics that show when the scheduler pulls resources from a process. A high number of context switches during the crossover phase, correlated with slower wall-clock time, is the evidence that the scheduler itself is the bottleneck — not just noise.",
         outcome:
-          "Built a host-side metrics collector (collect_system_metrics.py) that runs alongside the solver pod, sampling context switches and throttle events throughout the crossover phase. Each experiment now produces two datasets: solver timing and OS behavior.",
+          "Built a host-side metrics collector (collect_system_metrics.py) that runs alongside the solver pod, sampling context switches and throttle events throughout the crossover phase. Each experiment now produces two datasets: solver timing and OS behavior — so the results can actually prove causality, not just correlation.",
       },
     ],
     techStack: [
-      "Python",
-      "Kubernetes",
-      "kubeadm",
-      "GCP",
-      "Gurobi",
-      "Linux cgroups",
-      "Docker",
+      "Python", "Kubernetes", "kubeadm", "GCP", "Gurobi", "Linux cgroups", "Docker",
     ],
   },
   {
@@ -209,39 +179,34 @@ const unifiedProjects = [
       "High-performance computing implementation of matrix multiplication exploring the architectural differences between CPU and GPU parallelization — using MPI, CUDA, OpenMP, and cuBLAS.",
     tags: ["CUDA", "C++", "MPI", "cuBLAS", "Kubernetes", "Parallel Computing"],
     github: "https://github.com/101-toyota-team/resqlink-be",
+    // ─── REVISED INTRO ────────────────────────────────────────────────────────
     intro:
-      "Moving from a distributed CPU architecture to a GPU architecture isn't just about changing libraries; it requires a fundamental shift in how you distribute the data to avoid bottlenecking the hardware.",
+      "The CPU implementation worked: MPI scatter/gather across nodes, each process multiplying its assigned rows. Add more nodes, get more throughput — textbook distributed computing. Moving to a GPU should have been faster in every way, because GPUs have thousands of cores where CPUs have tens. Instead, the first GPU port was slower. Not a little slower — embarrassingly slower. Understanding why is what this project is actually about.",
     milestones: [
       {
-        title: "From Row-wise to Dot Product",
+        title: "From row-wise to dot product",
+        // ─── REVISED PROBLEM ────────────────────────────────────────────
         problem:
-          "In the previous CPU implementation, we used row-wise distribution via MPI Scatter/Gather. However, transferring this logic directly to the GPU resulted in massive thread idling. CPU cores are few but fast; GPU cores are thousands but simpler.",
-        concept: "Distributed memory vs. Massive GPU threading",
+          "The row-wise distribution from the MPI version seemed like a natural starting point for the GPU port — each thread block handles a row, just like each MPI process did. But GPU cores aren't CPU cores. They're not designed to handle large, independent chunks of work; they're designed to do thousands of tiny operations in parallel. Mapping rows to thread blocks left the vast majority of CUDA cores idle, especially on smaller matrix sizes.",
+        concept: "Distributed memory vs. massive GPU threading",
         conceptExplain:
           "GPUs have thousands of tiny cores that operate efficiently when threads are grouped in warps. Doing row-wise splitting on the GPU leaves massive numbers of cores idle, especially for smaller matrix dimensions.",
         outcome:
           "Pivoted to a dot-product thread mapping approach to maximize parallelization across thousands of CUDA cores. This ensures that every element calculation maps directly to active threads, achieving real GPU hardware utilization.",
       },
       {
-        title: "Overcoming Cache Thrashing with Shared Memory Tiling",
+        title: "Overcoming cache thrashing with shared memory tiling",
         problem:
           "Even with coalesced global memory access, the GPU's memory bandwidth quickly becomes the bottleneck because every thread reads the same matrix elements from global memory repeatedly. When the matrices grow, cache thrashing degrades performance.",
-        concept: "GPU Shared Memory Tiling",
+        concept: "GPU shared memory tiling",
         conceptExplain:
           "Shared memory acts as a high-speed local scratchpad per thread block. Tiling partitions the matrices into sub-blocks (tiles), loads them into shared memory once, and reuses them across the block, reducing global memory accesses.",
+        // ─── REVISED OUTCOME ────────────────────────────────────────────
         outcome:
-          "Implemented matrix_mul_cuda_shared. Discovered empirically that shared memory tiling only yields speedups on massive matrix inputs. On smaller matrices, the overhead of setup causes cache thrashing and minor performance penalties, highlighting that memory bandwidth is often a harder bottleneck than raw compute.",
+          "Implemented matrix_mul_cuda_shared and ran it against the naive CUDA version at multiple matrix sizes. The result was counter-intuitive: tiling only yields speedups on massive inputs. On smaller matrices, the setup overhead causes a performance penalty rather than an improvement. The takeaway isn't that tiling is good or bad — it's that memory bandwidth is often a harder bottleneck than raw compute, and that 'optimization' requires knowing exactly which bottleneck you're hitting.",
       },
     ],
-    techStack: [
-      "C++",
-      "CUDA",
-      "cuBLAS",
-      "MPI",
-      "OpenMP",
-      "Kubernetes",
-      "Docker",
-    ],
+    techStack: ["C++", "CUDA", "cuBLAS", "MPI", "OpenMP", "Kubernetes", "Docker"],
   },
   {
     id: "marmut",
@@ -285,17 +250,8 @@ const unifiedProjects = [
       },
     ],
     techStack: [
-      "TypeScript",
-      "Python",
-      "discord.js",
-      "discord.py",
-      "Lavalink",
-      "NodeLink",
-      "PostgreSQL",
-      "Prisma",
-      "Docker",
-      "yt-dlp",
-      "ffmpeg",
+      "TypeScript", "Python", "discord.js", "discord.py", "Lavalink", "NodeLink",
+      "PostgreSQL", "Prisma", "Docker", "yt-dlp", "ffmpeg",
     ],
   },
 ];
