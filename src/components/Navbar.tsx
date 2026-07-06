@@ -38,7 +38,7 @@ const Navbar = () => {
             className="text-sm font-bold tracking-tight"
             style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
           >
-            Nadhif Nadhiftya Putra
+            Fernanda Nadhiftya Putra
           </a>
 
           {/* Desktop links */}

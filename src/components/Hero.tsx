@@ -154,11 +154,6 @@ const Hero = () => (
         </div>
       </motion.div>
 
-      {/* GitHub stats — keep the existing component */}
-      <motion.div {...fade(0.44)} className="mt-12">
-        <GithubStats username="adipppp" />
-      </motion.div>
-
     </div>
   </section>
 );
