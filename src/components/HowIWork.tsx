@@ -3,15 +3,29 @@ import { motion } from "framer-motion";
 const principles = [
   {
     title: "I build until something breaks.",
-    body: "A system that works on the happy path isn't finished. The first version of Marmut worked — until a large queue caused a race condition. The first GPU port of the matrix multiplier was slower than the CPU version, not faster. The pattern is consistent: the real understanding comes from the failure, not the success. I try to design experiments where the failure mode is informative, not just unfortunate.",
+    reason:
+      "The real understanding comes from the failure, not the success — not the happy path.",
+    evidence: [
+      { label: "Marmut", slug: "marmut" },
+      { label: "Parallel Matrix Multiplication", slug: "matrix-multiplication" },
+    ],
   },
   {
     title: "I separate what changes from what doesn't.",
-    body: "Every project where I've added features without structure has eventually paid for it in bugs I couldn't trace. The Marmut TypeScript rewrite wasn't about TypeScript — it was about separating CommandManager from PlayerManager so adding a feature in one place didn't break something in another. In Go, that becomes Clean Architecture. The design pattern isn't decoration; it's what makes a system extensible without becoming unpredictable.",
+    reason:
+      "Structure isn't decoration — it's what lets a system grow without becoming unpredictable.",
+    evidence: [
+      { label: "Marmut", slug: "marmut" },
+      { label: "Asrama UI Backend", slug: "asrama-ui-backend" },
+    ],
   },
   {
     title: "I care about what happens at 3am.",
-    body: "A service that works during a demo isn't the same as a service that works when nobody's watching. The 1,256-line CI pipeline in SIRA, the billing audit trail that records every change with the actor who made it, the metrics collector that runs alongside the solver pod — these aren't nice-to-haves. I think about observability and failure recovery at the design stage, not as an afterthought.",
+    reason:
+      "A service that works during a demo isn't the same as one that works when nobody's watching.",
+    evidence: [
+      { label: "Smart Invoice Reminder AI (SIRA)", slug: "smart-invoice-reminder" },
+    ],
   },
 ];
 
@@ -32,7 +46,7 @@ const HowIWork = () => (
       >
         <h2
           className="text-2xl font-bold mb-4"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
         >
           How I work
         </h2>
@@ -46,7 +60,7 @@ const HowIWork = () => (
       </motion.div>
 
       {/* Principles grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px"
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-px rounded-xl overflow-hidden shadow-sm"
         style={{ border: "1px solid var(--color-border)", background: "var(--color-border)" }}
       >
         {principles.map((p, i) => (
@@ -56,13 +70,13 @@ const HowIWork = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: i * 0.1 }}
-            className="p-7"
+            className="p-7 flex flex-col"
             style={{ background: "var(--color-bg)" }}
           >
             <h3
               className="font-bold mb-3 leading-snug"
               style={{
-                fontFamily: "var(--font-serif)",
+                fontFamily: "var(--font-display)",
                 fontSize: "1.05rem",
                 color: "var(--color-text)",
               }}
@@ -70,11 +84,36 @@ const HowIWork = () => (
               {p.title}
             </h3>
             <p
-              className="text-sm leading-relaxed"
+              className="text-sm leading-relaxed mb-5"
               style={{ color: "var(--color-text-2)" }}
             >
-              {p.body}
+              {p.reason}
             </p>
+
+            {/* Evidence — links to relevant project detail pages */}
+            <div
+              className="flex flex-col gap-1.5 pt-4 mt-auto min-h-[112px]"
+              style={{ borderTop: "1px solid var(--color-border)" }}
+            >
+              <span
+                className="text-xs uppercase tracking-widest mb-0.5"
+                style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-2)", opacity: 0.7 }}
+              >
+                See it in
+              </span>
+              {p.evidence.map((e) => (
+                <a
+                  key={e.slug}
+                  href={`/projects/${e.slug}`}
+                  className="inline-flex items-center gap-1.5 text-sm transition-colors w-fit"
+                  style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)" }}
+                  onMouseEnter={(ev) => (ev.currentTarget.style.opacity = "0.75")}
+                  onMouseLeave={(ev) => (ev.currentTarget.style.opacity = "1")}
+                >
+                  {e.label} →
+                </a>
+              ))}
+            </div>
           </motion.div>
         ))}
       </div>
