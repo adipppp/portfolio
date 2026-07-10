@@ -41,7 +41,7 @@ const Projects = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: index * 0.07 }}
-            className="group grid py-7 px-5 -mx-5 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 no-underline"
+            className="group grid py-7 px-5 -mx-5 rounded-2xl transition-all duration-300 hover:bg-[var(--color-card-hover)] hover:shadow-[0_8px_30px_var(--color-shadow)] hover:-translate-y-1 no-underline"
             style={{
               gridTemplateColumns: "48px 1fr",
               gap: "0 1.25rem",

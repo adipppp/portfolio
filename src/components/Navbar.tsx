@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -13,9 +13,28 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const [isDark, setIsDark] = useState(false);
 
   const toggleMenu  = useCallback(() => setIsOpen((p) => !p), []);
   const closeMenu   = useCallback(() => setIsOpen(false), []);
+
+  useEffect(() => {
+    if (document.documentElement.classList.contains("dark")) {
+      setIsDark(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextDark = !isDark;
+    setIsDark(nextDark);
+    if (nextDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
 
   useEffect(() => {
     // If on /blog page or actual post, keep blog active
@@ -57,7 +76,7 @@ const Navbar = () => {
     <nav
       className="fixed top-0 w-full z-50 border-b"
       style={{
-        background: "rgba(250, 250, 250, 0.85)",
+        background: "var(--color-nav-bg)",
         backdropFilter: "blur(12px)",
         borderColor: "var(--color-border)",
       }}
@@ -118,10 +137,28 @@ const Navbar = () => {
             >
               open to work
             </a>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              className="p-2 rounded-full transition-colors hover:bg-[var(--color-tag)] cursor-pointer"
+              style={{ color: "var(--color-text-2)" }}
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
           </div>
 
-          {/* Mobile toggle */}
-          <div className="md:hidden">
+          {/* Mobile toggle & Theme Toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              className="p-2 rounded-full transition-colors hover:bg-[var(--color-tag)] cursor-pointer"
+              style={{ color: "var(--color-text-2)" }}
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
             <button
               onClick={toggleMenu}
               aria-label={isOpen ? "Close menu" : "Open menu"}
