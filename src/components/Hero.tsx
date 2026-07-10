@@ -32,7 +32,7 @@ const Hero = () => (
         {...fade(0.12)}
         className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6"
         style={{
-          fontFamily: "var(--font-serif)",
+          fontFamily: "var(--font-display)",
           color: "var(--color-text)",
           letterSpacing: "-0.02em",
           maxWidth: "700px",
@@ -62,7 +62,7 @@ const Hero = () => (
       >
         <a
           href="#projects"
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-sm transition-opacity"
+          className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-semibold rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
           style={{
             background: "var(--color-accent)",
             color: "var(--color-bg)",
@@ -77,7 +77,7 @@ const Hero = () => (
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium border rounded-sm transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium border rounded-full transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
           style={{
             borderColor: "var(--color-border)",
             color: "var(--color-text-2)",
@@ -106,7 +106,7 @@ const Hero = () => (
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
               aria-label={label}
-              className="p-2.5 border rounded-sm transition-colors"
+              className="p-2.5 border rounded-full transition-all duration-300 hover:shadow-sm hover:-translate-y-0.5"
               style={{
                 borderColor: "var(--color-border)",
                 color: "var(--color-text-2)",
@@ -138,7 +138,7 @@ const Hero = () => (
             <div key={l}>
               <span
                 className="block text-2xl font-bold mb-0.5"
-                style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+                style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
               >
                 {n}
               </span>
