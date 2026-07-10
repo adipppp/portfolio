@@ -19,7 +19,7 @@ const Projects = () => (
       >
         <h2
           className="text-2xl font-bold"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
         >
           Selected Work
         </h2>
@@ -41,11 +41,11 @@ const Projects = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.45, delay: index * 0.07 }}
-            className="group grid py-7 no-underline"
+            className="group grid py-7 px-5 -mx-5 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 no-underline"
             style={{
               gridTemplateColumns: "48px 1fr",
               gap: "0 1.25rem",
-              borderBottom: "1px solid var(--color-border)",
+              borderBottom: "1px solid transparent", // Use transparent so the layout doesn't jump
               color: "inherit",
               textDecoration: "none",
             }}
@@ -54,7 +54,7 @@ const Projects = () => (
             <span
               className="font-bold leading-tight pt-1 transition-colors duration-200"
               style={{
-                fontFamily: "var(--font-serif)",
+                fontFamily: "var(--font-display)",
                 fontSize: "1.5rem",
                 color: "var(--color-border)",
               }}
@@ -76,7 +76,7 @@ const Projects = () => (
               <h3
                 className="font-bold mb-2 transition-colors duration-200"
                 style={{
-                  fontFamily: "var(--font-serif)",
+                  fontFamily: "var(--font-display)",
                   fontSize: "1.125rem",
                   color: "var(--color-text)",
                   lineHeight: 1.3,
@@ -101,7 +101,7 @@ const Projects = () => (
                 {project.tags.slice(0, 4).map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-2 py-0.5 rounded-sm"
+                    className="text-xs px-2.5 py-0.5 rounded-md"
                     style={{
                       fontFamily: "var(--font-mono)",
                       background: "var(--color-tag)",
@@ -121,7 +121,7 @@ const Projects = () => (
                 )}
                 {project.status === "in-progress" && (
                   <span
-                    className="text-xs px-2 py-0.5 border rounded-sm ml-1"
+                    className="text-xs px-2.5 py-0.5 border rounded-md ml-1"
                     style={{
                       fontFamily: "var(--font-mono)",
                       borderColor: "var(--color-amber)",
@@ -132,7 +132,7 @@ const Projects = () => (
                   </span>
                 )}
                 <span
-                  className="ml-auto text-xs transition-colors duration-200"
+                  className="ml-auto text-xs transition-all duration-300 group-hover:translate-x-1.5 group-hover:text-[var(--color-accent)]"
                   style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-2)" }}
                 >
                   read more →
