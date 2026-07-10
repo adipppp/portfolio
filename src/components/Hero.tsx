@@ -1,6 +1,5 @@
 import { Github, Mail, FileText } from "lucide-react";
 import { motion } from "framer-motion";
-import GithubStats from "./GithubStats";
 
 const fade = (delay = 0) => ({
   initial: { opacity: 0, y: 16 },
