@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -12,13 +12,46 @@ const navLinks = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
   const toggleMenu  = useCallback(() => setIsOpen((p) => !p), []);
   const closeMenu   = useCallback(() => setIsOpen(false), []);
 
-  const handleNavClick = useCallback(
-    (to: string) => { closeMenu(); window.location.href = to; },
-    [closeMenu]
-  );
+  useEffect(() => {
+    // If on /blog page or actual post, keep blog active
+    if (window.location.pathname.startsWith("/blog")) {
+      setActiveSection("/blog");
+      return;
+    }
+
+    const sections = ["about", "experience", "projects", "contact"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(`/#${entry.target.id}`);
+          }
+        });
+      },
+      {
+        rootMargin: "-40% 0px -40% 0px", // Trigger when section occupies the middle portion of the screen
+      }
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // Fallback/Initial active section checking
+    if (window.location.hash) {
+      setActiveSection(`/${window.location.hash}`);
+    } else {
+      setActiveSection("/#about");
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <nav
@@ -43,22 +76,26 @@ const Navbar = () => {
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.to}
-                className="text-xs transition-colors duration-200"
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  color: "var(--color-text-2)",
-                  letterSpacing: "0.05em",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-accent)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--color-text-2)")}
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.to;
+              return (
+                <a
+                  key={link.name}
+                  href={link.to}
+                  className="text-xs transition-colors duration-200"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    color: isActive ? "var(--color-accent)" : "var(--color-text-2)",
+                    fontWeight: isActive ? 600 : 400,
+                    letterSpacing: "0.05em",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-accent)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = isActive ? "var(--color-accent)" : "var(--color-text-2)")}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
 
             {/* Open-to-work pill */}
             <a
@@ -112,20 +149,25 @@ const Navbar = () => {
             }}
           >
             <div className="px-6 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => handleNavClick(link.to)}
-                  className="w-full text-left py-3 text-sm transition-colors"
-                  style={{
-                    fontFamily: "var(--font-mono)",
-                    color: "var(--color-text-2)",
-                    borderBottom: "1px solid var(--color-border)",
-                  }}
-                >
-                  {link.name}
-                </button>
-              ))}
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.to;
+                return (
+                  <a
+                    key={link.name}
+                    href={link.to}
+                    onClick={closeMenu}
+                    className="w-full text-left py-3 text-sm transition-colors"
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      color: isActive ? "var(--color-accent)" : "var(--color-text-2)",
+                      fontWeight: isActive ? 600 : 400,
+                      borderBottom: "1px solid var(--color-border)",
+                    }}
+                  >
+                    {link.name}
+                  </a>
+                );
+              })}
             </div>
           </motion.div>
         )}

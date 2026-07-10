@@ -62,7 +62,7 @@ const BlogPost = ({ title, pubDate, tags, children }: Props) => {
 
       {/* Prose Container */}
       <div 
-        className="prose max-w-none prose-zinc 
+        className="prose max-w-none prose-warm 
           [&_a]:text-accent hover:[&_a]:opacity-80
           [&_pre]:border [&_pre]:border-border [&_pre]:bg-surface [&_pre]:text-text
           [&_blockquote]:border-accent [&_blockquote]:bg-accent-dim [&_blockquote]:not-italic [&_blockquote]:py-1 [&_blockquote]:rounded-sm

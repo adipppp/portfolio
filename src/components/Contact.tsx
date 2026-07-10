@@ -9,7 +9,7 @@ const EMAIL = "fernanda.nadhiftya@gmail.com";
 const inputStyle = (hasError: boolean): React.CSSProperties => ({
   width: "100%",
   background: "var(--color-surface)",
-  border: `1px solid ${hasError ? "#B45309" : "var(--color-border)"}`,
+  border: `1px solid ${hasError ? "var(--color-error)" : "var(--color-border)"}`,
   borderRadius: "2px",
   padding: "0.65rem 0.875rem",
   fontSize: "0.875rem",
@@ -32,7 +32,7 @@ const labelStyle: React.CSSProperties = {
 const errorStyle: React.CSSProperties = {
   fontSize: "0.75rem",
   fontFamily: "var(--font-mono)",
-  color: "#B45309",
+  color: "var(--color-error)",
   marginTop: "0.3rem",
 };
 
@@ -135,7 +135,7 @@ const Contact = () => {
                   style={inputStyle(!!errors.name)}
                   aria-invalid={!!errors.name}
                   onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-accent)")}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = errors.name ? "#B45309" : "var(--color-border)")}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = errors.name ? "var(--color-error)" : "var(--color-border)")}
                 />
                 {errors.name && <p style={errorStyle}>{errors.name}</p>}
               </div>
@@ -150,7 +150,7 @@ const Contact = () => {
                   style={inputStyle(!!errors.email)}
                   aria-invalid={!!errors.email}
                   onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-accent)")}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = errors.email ? "#B45309" : "var(--color-border)")}
+                  onBlur={(e) => (e.currentTarget.style.borderColor = errors.email ? "var(--color-error)" : "var(--color-border)")}
                 />
                 {errors.email && <p style={errorStyle}>{errors.email}</p>}
               </div>
@@ -166,7 +166,7 @@ const Contact = () => {
                 style={{ ...inputStyle(!!errors.message), resize: "vertical" }}
                 aria-invalid={!!errors.message}
                 onFocus={(e) => (e.currentTarget.style.borderColor = "var(--color-accent)")}
-                onBlur={(e) => (e.currentTarget.style.borderColor = errors.message ? "#B45309" : "var(--color-border)")}
+                onBlur={(e) => (e.currentTarget.style.borderColor = errors.message ? "var(--color-error)" : "var(--color-border)")}
               />
               {errors.message && <p style={errorStyle}>{errors.message}</p>}
             </div>
@@ -219,7 +219,6 @@ const Contact = () => {
             </h3>
             {[
               { label: "GitHub", href: "https://github.com/adipppp" },
-              { label: "LinkedIn", href: "#" },
             ].map(({ label, href }) => (
               <a
                 key={label}
