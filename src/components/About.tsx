@@ -24,7 +24,7 @@ const About = () => (
 
         <div
           className="space-y-5 text-base leading-relaxed"
-          style={{ color: "var(--color-text-2)", maxWidth: "620px" }}
+          style={{ color: "var(--color-text-2)", maxWidth: "820px" }}
         >
           <p>
             I'm a Computer Science student at Universitas Indonesia, focused on

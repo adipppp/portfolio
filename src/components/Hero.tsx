@@ -10,9 +10,29 @@ const fade = (delay = 0) => ({
 const Hero = () => (
   <section
     id="home"
-    className="pt-32 pb-16 md:pt-40 md:pb-20 px-6 sm:px-8"
+    className="relative pt-32 pb-16 md:pt-40 md:pb-20 px-6 sm:px-8 overflow-hidden"
   >
-    <div className="max-w-5xl mx-auto">
+    {/* Decorative contour lines — desktop only, purely ambient */}
+    <svg
+      className="hidden lg:block absolute pointer-events-none select-none"
+      style={{ top: "8%", right: "4%", width: "320px", height: "320px" }}
+      viewBox="0 0 320 320"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <g
+        stroke="var(--color-accent)"
+        strokeWidth="0.75"
+        opacity="0.16"
+        fill="none"
+      >
+        <path d="M40 90 Q 110 55 170 95 Q 235 135 220 195 Q 205 250 135 265 Q 70 278 55 220 Q 42 170 90 145" />
+        <path d="M55 120 Q 110 100 150 125 Q 195 150 182 195 Q 170 232 118 238 Q 75 244 68 205" />
+        <path d="M70 150 Q 108 138 135 155 Q 162 172 152 198 Q 144 218 112 218" />
+      </g>
+    </svg>
+
+    <div className="max-w-5xl mx-auto relative z-10">
 
       {/* Eyebrow */}
       <motion.p
