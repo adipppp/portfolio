@@ -57,8 +57,8 @@ const Navbar = () => {
     <nav
       className="fixed top-0 w-full z-50 border-b"
       style={{
-        background: "rgba(245, 241, 232, 0.94)",
-        backdropFilter: "blur(8px)",
+        background: "rgba(250, 250, 250, 0.85)",
+        backdropFilter: "blur(12px)",
         borderColor: "var(--color-border)",
       }}
     >
@@ -69,7 +69,7 @@ const Navbar = () => {
           <a
             href="/"
             className="text-sm font-bold tracking-tight"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+            style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
           >
             Fernanda Nadhiftya Putra
           </a>
@@ -100,7 +100,7 @@ const Navbar = () => {
             {/* Open-to-work pill */}
             <a
               href="/#contact"
-              className="text-xs px-3 py-1.5 border transition-all duration-200 rounded-sm"
+              className="text-xs px-3 py-1.5 border transition-all duration-200 rounded-full"
               style={{
                 fontFamily: "var(--font-mono)",
                 borderColor: "var(--color-accent)",
