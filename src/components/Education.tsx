@@ -11,11 +11,11 @@ const Education = () => {
     >
       <div className="max-w-4xl mx-auto">
         <motion.h2
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-2xl font-bold mb-16 text-center"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
         >
           Education
         </motion.h2>
@@ -53,7 +53,7 @@ const Education = () => {
                   <div>
                     <h3 
                       className="text-lg font-bold transition-colors"
-                      style={{ color: "var(--color-text)", fontFamily: "var(--font-serif)" }}
+                      style={{ color: "var(--color-text)", fontFamily: "var(--font-display)" }}
                     >
                       {edu.school}
                     </h3>

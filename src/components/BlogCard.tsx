@@ -35,7 +35,7 @@ const BlogCard = ({ slug, title, description, pubDate, tags }: Props) => {
         
         <h3 
           className="text-xl font-bold mb-3 transition-colors group-hover:opacity-80"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          style={{ fontFamily: "var(--font-sans)", color: "var(--color-text)" }}
         >
           <a href={`/blog/${slug}`}>
             <span className="absolute inset-0"></span>

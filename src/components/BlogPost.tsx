@@ -38,7 +38,7 @@ const BlogPost = ({ title, pubDate, tags, children }: Props) => {
 
         <h1 
           className="text-3xl md:text-4xl font-bold mb-6"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          style={{ fontFamily: "var(--font-sans)", color: "var(--color-text)" }}
         >
           {title}
         </h1>

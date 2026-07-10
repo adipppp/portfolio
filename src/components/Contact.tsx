@@ -74,7 +74,7 @@ const Contact = () => {
           />
           <h2
             className="text-2xl font-bold mb-3"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+            style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
           >
             Message sent.
           </h2>
@@ -112,7 +112,7 @@ const Contact = () => {
         >
           <h2
             className="text-2xl font-bold mb-3"
-            style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+            style={{ fontFamily: "var(--font-display)", color: "var(--color-text)" }}
           >
             Get in touch
           </h2>

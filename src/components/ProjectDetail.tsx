@@ -12,7 +12,7 @@ const ProjectDetail = ({ slug: id }: Props) => {
       <div className="pt-36 pb-20 px-6 text-center">
         <h1
           className="text-2xl font-bold mb-4"
-          style={{ fontFamily: "var(--font-serif)", color: "var(--color-text)" }}
+          style={{ fontFamily: "var(--font-sans)", color: "var(--color-text)" }}
         >
           Project not found
         </h1>
@@ -69,7 +69,7 @@ const ProjectDetail = ({ slug: id }: Props) => {
           <h1
             className="font-bold mb-3 leading-tight"
             style={{
-              fontFamily: "var(--font-serif)",
+              fontFamily: "var(--font-sans)",
               fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
               letterSpacing: "-0.02em",
               color: "var(--color-text)",
@@ -113,7 +113,7 @@ const ProjectDetail = ({ slug: id }: Props) => {
             <p
               className="text-base leading-[1.82] mb-12 pl-5"
               style={{
-                fontFamily: "var(--font-serif)",
+                fontFamily: "var(--font-sans)",
                 fontStyle: "italic",
                 color: "var(--color-text-2)",
                 borderLeft: "2px solid var(--color-accent)",
@@ -149,7 +149,7 @@ const ProjectDetail = ({ slug: id }: Props) => {
                     <h3
                       className="font-bold mb-3"
                       style={{
-                        fontFamily: "var(--font-serif)",
+                        fontFamily: "var(--font-sans)",
                         fontSize: "1.1rem",
                         color: "var(--color-text)",
                       }}
@@ -182,7 +182,7 @@ const ProjectDetail = ({ slug: id }: Props) => {
                       <p
                         className="font-bold mb-1.5"
                         style={{
-                          fontFamily: "var(--font-serif)",
+                          fontFamily: "var(--font-sans)",
                           fontSize: "0.95rem",
                           color: "var(--color-accent)",
                         }}

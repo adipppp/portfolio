@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -7,21 +7,21 @@
 /* ─── Design tokens ───────────────────────────────────────────── */
 @theme {
   /* Typography */
-  --font-serif:  "IBM Plex Serif", Georgia, serif;
-  --font-sans:   "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-  --font-mono:   "IBM Plex Mono", "Geist Mono", ui-monospace, monospace;
+  --font-sans:   "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Outfit", system-ui, -apple-system, sans-serif;
+  --font-mono:   "JetBrains Mono", ui-monospace, monospace;
 
-  /* Palette — warm parchment + forest-green ink */
-  --color-bg:          #F5F1E8;   /* parchment background  */
-  --color-surface:     #ECE7D8;   /* slightly darker surface / card bg */
-  --color-border:      #CEC5B0;   /* warm tan border */
-  --color-text:        #1A1614;   /* near-black warm */
-  --color-text-2:      #6B5C50;   /* warm muted brown */
-  --color-accent:      #2B4A36;   /* forest green — primary accent */
-  --color-accent-dim:  rgba(43, 74, 54, 0.09);
-  --color-tag:         #E3DDD0;   /* tag pill background */
-  --color-amber:       #B07D2A;   /* "in progress" status */
-  --color-error:       #B45309;   /* validation error text/border */
+  /* Palette — Modern Light Mode */
+  --color-bg:          #FAFAFA;   /* clean off-white background */
+  --color-surface:     #FFFFFF;   /* pure white elevated surface */
+  --color-border:      #E5E7EB;   /* subtle gray border */
+  --color-text:        #111827;   /* crisp dark slate */
+  --color-text-2:      #6B7280;   /* modern muted gray */
+  --color-accent:      #4F46E5;   /* vibrant indigo accent */
+  --color-accent-dim:  rgba(79, 70, 229, 0.08);
+  --color-tag:         #F3F4F6;   /* tag pill background */
+  --color-amber:       #D97706;   /* "in progress" status */
+  --color-error:       #DC2626;   /* validation error text/border */
 }
 
 /* ─── Base ───────────────────────────────────────────────────── */
