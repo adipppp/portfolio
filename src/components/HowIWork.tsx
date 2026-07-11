@@ -69,7 +69,7 @@ const HowIWork = () => (
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: i * 0.1 }}
+            transition={{ duration: 0.45 }}
             className="p-7 flex flex-col"
             style={{ background: "var(--color-bg)" }}
           >
