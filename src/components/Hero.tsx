@@ -12,23 +12,96 @@ const Hero = () => (
     id="home"
     className="relative pt-32 pb-16 md:pt-40 md:pb-20 px-6 sm:px-8 overflow-hidden"
   >
-    {/* Decorative contour lines — desktop only, purely ambient */}
+    {/* Decorative geometric grid — desktop only, purely ambient, covers full Hero */}
     <svg
-      className="hidden lg:block absolute pointer-events-none select-none"
-      style={{ top: "8%", right: "4%", width: "320px", height: "320px" }}
-      viewBox="0 0 320 320"
+      className="hidden lg:block absolute inset-0 z-0 pointer-events-none select-none"
+      style={{ width: "100%", height: "100%" }}
+      viewBox="0 0 1280 800"
+      preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
       focusable="false"
     >
-      <g
-        stroke="var(--color-accent)"
-        strokeWidth="0.75"
-        opacity="0.16"
-        fill="none"
-      >
-        <path d="M40 90 Q 110 55 170 95 Q 235 135 220 195 Q 205 250 135 265 Q 70 278 55 220 Q 42 170 90 145" />
-        <path d="M55 120 Q 110 100 150 125 Q 195 150 182 195 Q 170 232 118 238 Q 75 244 68 205" />
-        <path d="M70 150 Q 108 138 135 155 Q 162 172 152 198 Q 144 218 112 218" />
+      <defs>
+        {/* Fine repeating grid, tiled across the whole viewBox */}
+        <pattern
+          id="heroFineGrid"
+          width="40"
+          height="40"
+          patternUnits="userSpaceOnUse"
+        >
+          <path
+            d="M40 0 L0 0 0 40"
+            fill="none"
+            stroke="var(--color-accent)"
+            strokeWidth="0.5"
+          />
+        </pattern>
+
+        {/* Fade concentrated toward the right side, thinning out left/top/bottom */}
+        <radialGradient id="heroGridFade" cx="78%" cy="42%" r="62%">
+          <stop offset="0%" stopColor="white" stopOpacity="0.9" />
+          <stop offset="55%" stopColor="white" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="white" stopOpacity="0" />
+        </radialGradient>
+        <mask id="heroGridMask">
+          <rect x="0" y="0" width="1280" height="800" fill="url(#heroGridFade)" />
+        </mask>
+      </defs>
+
+      <g mask="url(#heroGridMask)">
+        {/* Fine background grid */}
+        <rect
+          x="0"
+          y="0"
+          width="1280"
+          height="800"
+          fill="url(#heroFineGrid)"
+          opacity="0.3"
+        />
+
+        {/* Major grid lines, sparser and slightly bolder */}
+        <g stroke="var(--color-accent)" strokeWidth="0.8" opacity="0.3" fill="none">
+          <line x1="680" y1="0" x2="680" y2="800" />
+          <line x1="800" y1="0" x2="800" y2="800" />
+          <line x1="920" y1="0" x2="920" y2="800" />
+          <line x1="1040" y1="0" x2="1040" y2="800" />
+          <line x1="1160" y1="0" x2="1160" y2="800" />
+          <line x1="600" y1="80" x2="1280" y2="80" />
+          <line x1="600" y1="200" x2="1280" y2="200" />
+          <line x1="600" y1="320" x2="1280" y2="320" />
+          <line x1="600" y1="440" x2="1280" y2="440" />
+          <line x1="600" y1="560" x2="1280" y2="560" />
+          <line x1="600" y1="680" x2="1280" y2="680" />
+        </g>
+
+        {/* Concentric circles, primary focal point */}
+        <g stroke="var(--color-accent)" strokeWidth="0.8" opacity="0.25" fill="none">
+          <circle cx="980" cy="340" r="40" />
+          <circle cx="980" cy="340" r="80" />
+          <circle cx="980" cy="340" r="130" />
+          <circle cx="980" cy="340" r="190" />
+        </g>
+
+        {/* Secondary smaller circle cluster, lower right */}
+        <g stroke="var(--color-accent)" strokeWidth="0.6" opacity="0.18" fill="none">
+          <circle cx="1120" cy="600" r="24" />
+          <circle cx="1120" cy="600" r="48" />
+        </g>
+
+        {/* Diagonal accent lines cutting through the grid */}
+        <g stroke="var(--color-accent)" strokeWidth="0.6" opacity="0.15" fill="none">
+          <line x1="700" y1="700" x2="980" y2="120" />
+          <line x1="900" y1="760" x2="1200" y2="80" />
+        </g>
+
+        {/* Small filled nodes at a few grid intersections, for texture */}
+        <g fill="var(--color-accent)" opacity="0.2">
+          <circle cx="800" cy="200" r="3" />
+          <circle cx="1040" cy="320" r="3" />
+          <circle cx="920" cy="440" r="3" />
+          <circle cx="1160" cy="560" r="3" />
+          <circle cx="680" cy="80" r="3" />
+        </g>
       </g>
     </svg>
 
